@@ -18,6 +18,7 @@ const AcademicSession = () => {
     activeSession: null,
     totalSessions: 0,
   });
+  
   const [loaded, setLoaded] = useState(false);
 
   const fetchSessions = async () => {
