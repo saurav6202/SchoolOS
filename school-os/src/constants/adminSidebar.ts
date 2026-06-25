@@ -6,6 +6,7 @@ import {
   Settings,
   GraduationCap,
   Notebook,
+  CalendarRange,
 } from "lucide-react";
 
 import type { SidebarSecion } from "../types/sidebar";
@@ -53,14 +54,9 @@ export const adminSidebarItems: Array<SidebarSecion> = [
       },
       {
         title: "Academic Session",
-        icon: Notebook,
+        icon: CalendarRange,
         path: "/admin/academic-session",
       },
-      {
-        title: "Settings",
-        icon: Notebook,
-        path: "/admin/settings",
-      }
     ],
   },
   {

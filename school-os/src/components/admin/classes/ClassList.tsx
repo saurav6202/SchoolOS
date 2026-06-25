@@ -132,7 +132,7 @@ const ClassList = ({
               text-textPrimary
             "
           >
-            Teachers
+            Classes
           </h2>
 
           <p
@@ -142,7 +142,7 @@ const ClassList = ({
               text-textSecondary
             "
           >
-            Manage all teachers
+            Manage all classes
           </p>
         </div>
 
@@ -160,7 +160,7 @@ const ClassList = ({
 
           <input
             type="text"
-            placeholder="Search teacher..."
+            placeholder="Search classes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="
@@ -323,7 +323,7 @@ const ClassList = ({
                       font-semibold
                     "
                   >
-                    No Teachers Found
+                    No Class Found
                   </h3>
 
                   <p
