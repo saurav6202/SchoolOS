@@ -1,6 +1,5 @@
 import { Search, User } from "lucide-react";
 import {
-  useEffect,
   useState,
   type ChangeEventHandler,
   type SubmitEventHandler,

@@ -22,13 +22,12 @@ const AcademicSession = () => {
 
   const fetchSessions = async () => {
     const res = await api.get("/api/academic-sessions");
-    console.log("academicsession res: ", res);
     setSessions(res.data.data);
   };
 
   const fetchStats = async () => {
     const res = await api.get("/api/academic-sessions/stats");
-    console.log(res);
+    setStatData(res.data.data)
   };
 
   const refreshSessions = async () => {

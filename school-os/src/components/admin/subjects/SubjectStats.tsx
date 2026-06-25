@@ -5,7 +5,6 @@ const SubjectStats = ({
   totalSubjects,
   coreSubjects,
   optionalSubjects,
-  loading,
 }: {
   optionalSubjects: number;
   coreSubjects: number;
