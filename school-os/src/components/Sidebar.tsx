@@ -56,10 +56,10 @@ const Sidebar = ({ sidebarItems, role }: SidebarProps) => {
       <div className="border-t border-border px-4 py-3">
         <div className="bg-background p-3 rounded-lg flex gap-3 items-center">
           <div className="text-lg font-semibold bg-primary rounded-full text-white h-10 w-10 flex items-center justify-center">
-            {user?.name.charAt(0)}
+            {capitalize(`${user?.name.charAt(0)}`)}
           </div>
           <div className="leading-tight">
-            <p className="text-textPrimary">{user?.name}</p>
+            <p className="text-textPrimary">{capitalize(`${user?.name}`)}</p>
             <span className="text-textSecondary text-sm">
               {capitalize(role)}
             </span>

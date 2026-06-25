@@ -86,11 +86,6 @@ const StudentSearchCard = () => {
     setAdmissionNo(e.target.value.trim());
     if (e.target.value) setFormData("");
   };
-
-  useEffect(() => {
-    console.log("students: ", students, typeof students);
-  }, [students]);
-
   return (
     <section
       className="

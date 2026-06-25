@@ -1,5 +1,6 @@
 import { Bell, Search, ChevronDown } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import { capitalize } from "../utils/string";
 
 const Navbar = () => {
   const { user } = useAuthStore();
@@ -113,7 +114,7 @@ const Navbar = () => {
               text-white
             "
           >
-            {user?.name.charAt(0)}
+            {capitalize(`${user?.name.charAt(0)}`)}
           </div>
 
           <div className="text-left">
@@ -124,7 +125,7 @@ const Navbar = () => {
                 text-textPrimary
               "
             >
-              {user?.name}
+              {capitalize(`${user?.name}`)}
             </p>
 
             <p

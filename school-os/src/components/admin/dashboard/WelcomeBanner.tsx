@@ -1,30 +1,22 @@
-import {
-  Users,
-  UserCog,
-  Bell,
-} from "lucide-react";
+import { Users, UserCog, Bell } from "lucide-react";
+import { useAuthStore } from "../../../store/authStore";
+import { capitalize } from "../../../utils/string";
 
 const WelcomeBanner = () => {
+  const { user } = useAuthStore();
   const today = new Date();
 
-  const formattedDate = today.toLocaleDateString(
-    "en-IN",
-    {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }
-  );
+  const formattedDate = today.toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   const hour = today.getHours();
 
   const greeting =
-    hour < 12
-      ? "Good Morning"
-      : hour < 17
-      ? "Good Afternoon"
-      : "Good Evening";
+    hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
 
   return (
     <section
@@ -47,7 +39,7 @@ const WelcomeBanner = () => {
             text-textPrimary
           "
         >
-          {greeting}, Admin 👋
+          {greeting}, {capitalize(`${user?.name}`)} 👋
         </h1>
 
         <p
@@ -78,10 +70,7 @@ const WelcomeBanner = () => {
             p-4
           "
         >
-          <Users
-            size={22}
-            className="text-primary"
-          />
+          <Users size={22} className="text-primary" />
 
           <h3
             className="
@@ -94,9 +83,7 @@ const WelcomeBanner = () => {
             1,250
           </h3>
 
-          <p className="text-textSecondary">
-            Total Students
-          </p>
+          <p className="text-textSecondary">Total Students</p>
         </div>
 
         <div
@@ -108,10 +95,7 @@ const WelcomeBanner = () => {
             p-4
           "
         >
-          <UserCog
-            size={22}
-            className="text-success"
-          />
+          <UserCog size={22} className="text-success" />
 
           <h3
             className="
@@ -124,9 +108,7 @@ const WelcomeBanner = () => {
             56
           </h3>
 
-          <p className="text-textSecondary">
-            Total Teachers
-          </p>
+          <p className="text-textSecondary">Total Teachers</p>
         </div>
 
         <div
@@ -138,10 +120,7 @@ const WelcomeBanner = () => {
             p-4
           "
         >
-          <Bell
-            size={22}
-            className="text-warning"
-          />
+          <Bell size={22} className="text-warning" />
 
           <h3
             className="
@@ -154,9 +133,7 @@ const WelcomeBanner = () => {
             12
           </h3>
 
-          <p className="text-textSecondary">
-            Active Notices
-          </p>
+          <p className="text-textSecondary">Active Notices</p>
         </div>
       </div>
     </section>

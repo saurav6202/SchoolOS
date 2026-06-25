@@ -20,10 +20,10 @@ interface Session {
 
 const SessionsTable = ({
   sessions,
-  fetchSessions,
+  onSuccess,
 }: {
   sessions: Session[];
-  fetchSessions: () => Promise<void>;
+  onSuccess: () => Promise<void>;
 }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -46,10 +46,7 @@ const SessionsTable = ({
 
       showSuccess(res.data.message);
 
-
-      // refetch sessions
-      await fetchSessions();
-
+      onSuccess();
       // close dialog
       setIsDialogOpen(false);
       setSelectedSession(null);
@@ -72,7 +69,7 @@ const SessionsTable = ({
       if (confirmDelete) {
         const res = await api.delete(`/api/academic-sessions/${id}`);
         showSuccess(res.data.message);
-        fetchSessions();
+        onSuccess();
       }
     } catch (error: any) {
       showError(error.response.data.message);

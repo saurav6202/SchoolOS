@@ -1,8 +1,15 @@
 import { GraduationCap, UserCheck, UserX } from "lucide-react";
+import StatCard from "../../common/StatCard";
 
-const ClassStats = ({ totalClasses, assignedClasses, unAssignedClasses}: { totalClasses: number;
+const ClassStats = ({
+  totalClasses,
+  assignedClasses,
+  unAssignedClasses,
+}: {
+  totalClasses: number;
   assignedClasses: number;
-  unAssignedClasses: number;}) => {
+  unAssignedClasses: number;
+}) => {
   const stats = [
     {
       title: "Total Classes",
@@ -37,84 +44,7 @@ const ClassStats = ({ totalClasses, assignedClasses, unAssignedClasses}: { total
       "
     >
       {stats.map((stat) => (
-        <div
-          key={stat.title}
-          className="
-            rounded-2xl
-            border
-            border-border
-            bg-surface
-            p-6
-            shadow-card
-            transition-all
-            duration-300
-            hover:shadow-lg
-          "
-        >
-          <div className="flex items-start justify-between">
-            <div>
-              <p
-                className="
-                  text-sm
-                  font-medium
-                  text-textSecondary
-                "
-              >
-                {stat.title}
-              </p>
-
-              <h2
-                className="
-                  mt-3
-                  text-5xl
-                  font-bold
-                  text-textPrimary
-                "
-              >
-                {stat.value}
-              </h2>
-            </div>
-
-            <div
-              className={`
-                flex
-                h-16
-                w-16
-                items-center
-                justify-center
-                rounded-2xl
-                ${stat.iconBg}
-              `}
-            >
-              <stat.icon size={30} className={stat.iconColor} />
-            </div>
-          </div>
-
-          {/* FOOTER */}
-          <div
-            className="
-              mt-6
-              border-t
-              border-border
-              pt-4
-            "
-          >
-            <p
-              className="
-                text-sm
-                text-textSecondary
-              "
-            >
-              {stat.title === "Total Classes" &&
-                "All classes currently created"}
-
-              {stat.title === "Assigned Classes" &&
-                "Classes with a class teacher"}
-
-              {stat.title === "Unassigned Classes" && "Need teacher assignment"}
-            </p>
-          </div>
-        </div>
+        <StatCard stat={stat} />
       ))}
     </section>
   );
