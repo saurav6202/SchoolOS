@@ -23,8 +23,6 @@ app.use(
 
 app.get("/", (_, res) => {
   res.send("School OS API Running");
-
-  
 });
 
 import authRouter from "./routes/auth.routes";
@@ -38,6 +36,7 @@ import attendanceRoutes from "./routes/attendance.routes";
 import academicWorkRoutes from "./routes/academicWork.routes";
 import holidayRoutes from "./routes/holiday.route";
 import { authMiddleware } from "./middleware/auth.middleware";
+import notificationRouter from "./routes/notification.routes";
 
 app.use("/api/auth", authRouter);
 app.use("/api/classes", authMiddleware, classRouter);
@@ -49,5 +48,6 @@ app.use("/api/school-settings", authMiddleware, schoolSettingsRoutes);
 app.use("/api/attendance", authMiddleware, attendanceRoutes);
 app.use("/api/academic-work", authMiddleware, academicWorkRoutes);
 app.use("/api/holidays", authMiddleware, holidayRoutes);
+app.use("/notifications", authMiddleware, notificationRouter);
 
 export default app;
