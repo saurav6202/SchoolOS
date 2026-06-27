@@ -1,42 +1,45 @@
-import {
-  Bell,
-  Megaphone,
-  AlertTriangle,
-  CalendarDays,
-} from "lucide-react";
-
-const stats = [
-  {
-    title: "Total Notices",
-    value: 42,
-    icon: Bell,
-    iconColor: "text-primary",
-    iconBg: "bg-primaryLight",
-  },
-  {
-    title: "Active Notices",
-    value: 12,
-    icon: Megaphone,
-    iconColor: "text-success",
-    iconBg: "bg-success/10",
-  },
-  {
-    title: "High Priority",
-    value: 4,
-    icon: AlertTriangle,
-    iconColor: "text-error",
-    iconBg: "bg-error/10",
-  },
-  {
-    title: "Published Today",
-    value: 3,
-    icon: CalendarDays,
-    iconColor: "text-warning",
-    iconBg: "bg-warning/10",
-  },
-];
+import { Bell, Megaphone, AlertTriangle } from "lucide-react";
+import { useEffect, useState } from "react";
+import api from "../../../api/api";
 
 const NoticeStats = () => {
+  const [statData, setStatData] = useState({
+    totalNotices: 0,
+    highPriorityNotices: 0,
+  });
+  const fetchNoticeStats = async () => {
+    const res = await api.get("/api/notices/getstats");
+    setStatData(res.data.data);
+  };
+
+  useEffect(() => {
+    fetchNoticeStats();
+  }, []);
+
+  const stats = [
+    {
+      title: "Total Notices",
+      value: statData.totalNotices,
+      icon: Bell,
+      iconColor: "text-primary",
+      iconBg: "bg-primaryLight",
+    },
+    {
+      title: "Active Notices",
+      value: statData.totalNotices,
+      icon: Megaphone,
+      iconColor: "text-success",
+      iconBg: "bg-success/10",
+    },
+    {
+      title: "High Priority",
+      value: statData.highPriorityNotices,
+      icon: AlertTriangle,
+      iconColor: "text-error",
+      iconBg: "bg-error/10",
+    },
+  ];
+
   return (
     <section
       className="
@@ -95,10 +98,7 @@ const NoticeStats = () => {
                 ${stat.iconBg}
               `}
             >
-              <stat.icon
-                size={26}
-                className={stat.iconColor}
-              />
+              <stat.icon size={26} className={stat.iconColor} />
             </div>
           </div>
         </div>

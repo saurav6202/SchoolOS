@@ -8,34 +8,38 @@ import {
   Clock3,
 } from "lucide-react";
 import { useState } from "react";
+import { capitalize } from "../../../utils/string";
+import api from "../../../api/api";
+import { showError, showSuccess } from "../../../utils/toast";
+import Loader from "../../common/Loader";
 
-type Audience =
-  | "students"
-  | "teachers"
-  | "everyone";
+type Audience = "students" | "teachers" | "everyone";
 
-type Priority =
-  | "low"
-  | "medium"
-  | "high";
+type Priority = "low" | "medium" | "high";
 
 const CreateNoticeCard = () => {
   const [title, setTitle] = useState("");
-  const [content, setContent] =
-    useState("");
+  const [content, setContent] = useState("");
 
-  const [audience, setAudience] =
-    useState<Audience>("everyone");
+  const [audience, setAudience] = useState<Audience>("everyone");
 
-  const [priority, setPriority] =
-    useState<Priority>("medium");
+  const [priority, setPriority] = useState<Priority>("medium");
 
-  const [isPublishing, setIsPublishing] =
-    useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  const sendNotification = async (payload: {
+    title: string;
+    body: string;
+    url: string;
+    type: string;
+  }) => {
+    const res = await api.post("/api/notifications/send", { payload });
+    if (res.data.success) {
+      showSuccess("Notification sent 🚀");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -48,23 +52,20 @@ const CreateNoticeCard = () => {
         priority,
       };
 
-      console.log(noticeData);
-
-      /**
-       * await api.post(
-       *   "/notices",
-       *   noticeData
-       * );
-       */
-
+      const res = await api.post("/api/notices", noticeData);
+      await sendNotification({
+        title,
+        body: content,
+        url: "/",
+        type: audience,
+      });
+      showSuccess(res.data.message);
       setTitle("");
       setContent("");
       setAudience("everyone");
       setPriority("medium");
-
-      alert("Notice Published");
-    } catch (error) {
-      alert("Failed to publish notice");
+    } catch (error: any) {
+      showError(error.response.data.message);
     } finally {
       setIsPublishing(false);
     }
@@ -92,23 +93,19 @@ const CreateNoticeCard = () => {
     {
       value: "low",
       label: "Low",
-      color:
-        "border-success bg-success/10 text-success",
+      color: "border-success bg-success/10 text-success",
       icon: CheckCircle2,
     },
     {
       value: "medium",
       label: "Medium",
-      color:
-        "border-warning bg-warning/10 text-warning",
+      color: "border-warning bg-warning/10 text-warning",
       icon: Clock3,
     },
     {
       value: "high",
-      label:
-        "High Priority",
-      color:
-        "border-error bg-error/10 text-error",
+      label: "High Priority",
+      color: "border-error bg-error/10 text-error",
       icon: AlertTriangle,
     },
   ];
@@ -137,10 +134,7 @@ const CreateNoticeCard = () => {
             bg-primaryLight
           "
         >
-          <BellPlus
-            size={22}
-            className="text-primary"
-          />
+          <BellPlus size={22} className="text-primary" />
         </div>
 
         <div>
@@ -160,17 +154,13 @@ const CreateNoticeCard = () => {
               text-textSecondary
             "
           >
-            Publish announcements for
-            students and teachers
+            Publish announcements for students and teachers
           </p>
         </div>
       </div>
 
       {/* FORM */}
-      <form
-        onSubmit={handleSubmit}
-        className="mt-6 space-y-6"
-      >
+      <form onSubmit={handleSubmit} className="mt-6 space-y-6">
         {/* TITLE */}
         <div>
           <label
@@ -188,9 +178,7 @@ const CreateNoticeCard = () => {
           <input
             type="text"
             value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter notice title"
             className="
               w-full
@@ -224,9 +212,7 @@ const CreateNoticeCard = () => {
           <textarea
             rows={5}
             value={content}
-            onChange={(e) =>
-              setContent(e.target.value)
-            }
+            onChange={(e) => setContent(e.target.value)}
             placeholder="Write notice here..."
             className="
               w-full
@@ -244,33 +230,25 @@ const CreateNoticeCard = () => {
           />
         </div>
         <div className="flex justify-between items-center">
-
-    
-
-        {/* AUDIENCE */}
-        <div>
-          <h3
-            className="
+          {/* AUDIENCE */}
+          <div>
+            <h3
+              className="
               mb-3
               text-sm
               font-medium
               text-textPrimary
             "
-          >
-            Audience
-          </h3>
+            >
+              Audience
+            </h3>
 
-          <div className="grid grid-cols-3 gap-3">
-            {audienceOptions.map(
-              (option) => (
+            <div className="grid grid-cols-3 gap-3">
+              {audienceOptions.map((option) => (
                 <button
                   key={option.value}
                   type="button"
-                  onClick={() =>
-                    setAudience(
-                      option.value as Audience
-                    )
-                  }
+                  onClick={() => setAudience(option.value as Audience)}
                   className={`
                     flex
                     items-center
@@ -281,8 +259,7 @@ const CreateNoticeCard = () => {
                     transition-all
 
                     ${
-                      audience ===
-                      option.value
+                      audience === option.value
                         ? "border-primary bg-primaryLight"
                         : "border-border"
                     }
@@ -290,39 +267,31 @@ const CreateNoticeCard = () => {
                 >
                   <option.icon size={20} />
 
-                  <span className="text-sm font-medium">
-                    {option.label}
-                  </span>
+                  <span className="text-sm font-medium">{option.label}</span>
                 </button>
-              )
-            )}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* PRIORITY */}
-        <div>
-          <h3
-            className="
+          {/* PRIORITY */}
+          <div>
+            <h3
+              className="
               mb-3
               text-sm
               font-medium
               text-textPrimary
             "
-          >
-            Priority
-          </h3>
+            >
+              Priority
+            </h3>
 
-          <div className="grid grid-cols-3 gap-3">
-            {priorityOptions.map(
-              (option) => (
+            <div className="grid grid-cols-3 gap-3">
+              {priorityOptions.map((option) => (
                 <button
                   key={option.value}
                   type="button"
-                  onClick={() =>
-                    setPriority(
-                      option.value as Priority
-                    )
-                  }
+                  onClick={() => setPriority(option.value as Priority)}
                   className={`
                     flex
                     items-center
@@ -334,24 +303,18 @@ const CreateNoticeCard = () => {
                     transition-all
 
                     ${
-                      priority ===
-                      option.value
-                        ? option.color
-                        : "border-border"
+                      priority === option.value ? option.color : "border-border"
                     }
                   `}
                 >
                   <option.icon size={18} />
 
-                  <span className="font-medium">
-                    {option.label}
-                  </span>
+                  <span className="font-medium">{option.label}</span>
                 </button>
-              )
-            )}
+              ))}
+            </div>
           </div>
         </div>
-            </div>
 
         {/* PREVIEW */}
         <div
@@ -381,8 +344,7 @@ const CreateNoticeCard = () => {
                 text-textPrimary
               "
             >
-              {title ||
-                "Notice title will appear here"}
+              {title || "Notice title will appear here"}
             </p>
 
             <p
@@ -391,8 +353,7 @@ const CreateNoticeCard = () => {
                 text-textSecondary
               "
             >
-              {content ||
-                "Notice content preview..."}
+              {content || "Notice content preview..."}
             </p>
 
             <div className="flex gap-2 pt-2">
@@ -407,7 +368,7 @@ const CreateNoticeCard = () => {
                   text-primary
                 "
               >
-                {audience}
+                {capitalize(audience)}
               </span>
 
               <span
@@ -421,7 +382,7 @@ const CreateNoticeCard = () => {
                   text-primaryDark
                 "
               >
-                {priority}
+                {capitalize(priority)}
               </span>
             </div>
           </div>
@@ -441,11 +402,17 @@ const CreateNoticeCard = () => {
             transition-all
             hover:bg-primaryDark
             disabled:opacity-50
+            flex
+            justify-center
           "
         >
-          {isPublishing
-            ? "Publishing..."
-            : "Publish Notice"}
+          {isPublishing ? (
+            <div className="gap-3 flex items-center">
+              Publishing... <Loader />
+            </div>
+          ) : (
+            "Publish Notice"
+          )}
         </button>
       </form>
     </section>

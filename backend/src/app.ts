@@ -36,7 +36,8 @@ import attendanceRoutes from "./routes/attendance.routes";
 import academicWorkRoutes from "./routes/academicWork.routes";
 import holidayRoutes from "./routes/holiday.route";
 import { authMiddleware } from "./middleware/auth.middleware";
-import notificationRouter from "./routes/notification.routes";
+import notificationRoutes from "./routes/notification.routes";
+import noticeRoutes from "./routes/notice.routes";
 
 app.use("/api/auth", authRouter);
 app.use("/api/classes", authMiddleware, classRouter);
@@ -48,6 +49,7 @@ app.use("/api/school-settings", authMiddleware, schoolSettingsRoutes);
 app.use("/api/attendance", authMiddleware, attendanceRoutes);
 app.use("/api/academic-work", authMiddleware, academicWorkRoutes);
 app.use("/api/holidays", authMiddleware, holidayRoutes);
-app.use("/notifications", authMiddleware, notificationRouter);
+app.use("/api/notifications", authMiddleware, notificationRoutes);
+app.use("/api/notices", authMiddleware, noticeRoutes);
 
 export default app;

@@ -10,4 +10,5 @@ router.post("/subscribe", handleSubscribe);
 router.delete("/unsubscribe", handleUnsubscribe);
 router.post("/send", sendToAllUsers);
 
+
 export default router;

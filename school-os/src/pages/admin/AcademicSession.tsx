@@ -29,6 +29,7 @@ const AcademicSession = () => {
   const fetchStats = async () => {
     const res = await api.get("/api/academic-sessions/stats");
     setStatData(res.data.data)
+    console.log("dataaa: ", res.data.data)
   };
 
   const refreshSessions = async () => {

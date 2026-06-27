@@ -5,6 +5,8 @@ export const handleSubscribe = async (req: Request, res: Response) => {
   try {
     const { data } = req.body;
 
+    console.log("subs data: ", data);
+
     if (!data.subscription) {
       return res.status(400).json({
         success: false,

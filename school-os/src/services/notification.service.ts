@@ -48,7 +48,7 @@ class NotificationService {
     const subscription = await this.getSubscriptions();
     if (!subscription) return;
 
-    await api.delete("/notifications/unsubscribe", {
+    await api.delete("/api/notifications/unsubscribe", {
       data: {
         endpoint: subscription.endpoint,
       },
@@ -61,7 +61,7 @@ class NotificationService {
 
   async saveSubscription(payload: SaveSubscriptionRequest) {
     console.log("payload: ", payload)
-    const res = await api.post("/notifications/subscribe", { data: payload });
+    const res = await api.post("/api/notifications/subscribe", { data: payload });
     return res.data;
   }
 

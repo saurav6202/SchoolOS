@@ -11,30 +11,9 @@ import {
   Eye,
 } from "lucide-react";
 import Button from "../../common/Button";
-
-const notices = [
-  {
-    id: 1,
-    title: "Unit Test Schedule Released",
-    audience: "everyone",
-    priority: "high",
-    createdAt: "Today, 09:30 AM",
-  },
-  {
-    id: 2,
-    title: "Homework Submission Deadline",
-    audience: "students",
-    priority: "medium",
-    createdAt: "Yesterday",
-  },
-  {
-    id: 3,
-    title: "Staff Meeting Tomorrow",
-    audience: "teachers",
-    priority: "low",
-    createdAt: "2 Days Ago",
-  },
-];
+import api from "../../../api/api";
+import { useEffect, useState } from "react";
+import { formatDateTime } from "../../../utils/formatDate";
 
 const audienceConfig = {
   students: {
@@ -76,18 +55,38 @@ const priorityConfig = {
   },
 };
 
+interface NoticeType {
+  title: string;
+  content: string;
+  audience: string;
+  priority: string;
+  _id: string;
+  createdAt: string;
+}
+
 const ActiveNotices = () => {
-  const handleEdit = (noticeId: number) => {
+  const [notices, setNotices] = useState<NoticeType[]>([]);
+
+  const handleEdit = (noticeId: string) => {
     console.log("Edit", noticeId);
   };
 
-  const handleDelete = (noticeId: number) => {
+  const handleDelete = (noticeId: string) => {
     const confirmDelete = window.confirm("Delete this notice?");
 
     if (confirmDelete) {
       console.log("Delete", noticeId);
     }
   };
+
+  const fetchNotices = async () => {
+    const res = await api.get("/api/notices");
+    setNotices(res.data.data)
+  };
+
+  useEffect(() => {
+    fetchNotices();
+  }, []);
 
   return (
     <section
@@ -156,7 +155,7 @@ const ActiveNotices = () => {
 
           return (
             <div
-              key={notice.id}
+              key={notice._id}
               className="
                 p-4
                 bg-background
@@ -187,7 +186,7 @@ const ActiveNotices = () => {
                       text-sm text-textSecondary
                     "
                   >
-                    Published: {notice.createdAt}
+                    Published: {formatDateTime(notice.createdAt)}
                   </p>
                 </div>
 
@@ -258,7 +257,7 @@ const ActiveNotices = () => {
                 "
                 >
                   <Button
-                    handleClick={() => handleEdit(notice.id)}
+                    handleClick={() => handleEdit(notice._id)}
                     className="
                     text-black text-sm
                     bg-surface
@@ -271,7 +270,7 @@ const ActiveNotices = () => {
                   </Button>
 
                   <button
-                    onClick={() => handleDelete(notice.id)}
+                    onClick={() => handleDelete(notice._id)}
                     className="
                     flex
                     px-6 py-3
