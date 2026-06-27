@@ -74,6 +74,7 @@ export const useTeachersStore = create<TeachersStore>((set) => ({
 
   refreshTeachers: async () => {
     try {
+      set({ loading: true });
       const [teacherStatsRes, teachersRes, classesRes, subjectsRes] =
         await Promise.all([
           api.get("/api/teachers/getstats"),
@@ -91,6 +92,7 @@ export const useTeachersStore = create<TeachersStore>((set) => ({
         nonClassTeachers: teacherStatsRes.data.data.nonClassTeachers,
 
         loaded: true,
+        loading: false,
       });
     } catch (error) {
       console.error("Failed to refresh teachers:", error);

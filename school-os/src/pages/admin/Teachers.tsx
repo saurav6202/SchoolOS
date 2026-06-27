@@ -4,6 +4,7 @@ import TeacherList from "../../components/admin/teachers/TeacherList";
 import TeacherStats from "../../components/admin/teachers/TeacherStats";
 import { useTeachersStore } from "../../store/teachersStore";
 import UploadTeachersCard from "../../components/admin/teachers/UploadTeachersCard";
+import PageLoader from "../../components/common/PageLoader";
 
 const Teachers = () => {
   const {
@@ -16,6 +17,7 @@ const Teachers = () => {
     nonClassTeachers,
 
     loaded,
+    loading,
 
     refreshTeachers,
   } = useTeachersStore();
@@ -25,6 +27,10 @@ const Teachers = () => {
       refreshTeachers();
     }
   }, [loaded, refreshTeachers]);
+
+   if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="space-y-6">

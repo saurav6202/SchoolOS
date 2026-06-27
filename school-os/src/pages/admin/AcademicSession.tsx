@@ -3,6 +3,7 @@ import api from "../../api/api";
 import CreateSessionCard from "../../components/admin/academicsession/CreateSessionCard";
 import SessionsTable from "../../components/admin/academicsession/SessionsTable";
 import SessionStats from "../../components/admin/academicsession/SessionStats";
+import PageLoader from "../../components/common/PageLoader";
 
 interface Session {
   _id: string;
@@ -18,8 +19,9 @@ const AcademicSession = () => {
     activeSession: null,
     totalSessions: 0,
   });
-  
+
   const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchSessions = async () => {
     const res = await api.get("/api/academic-sessions");
@@ -28,13 +30,18 @@ const AcademicSession = () => {
 
   const fetchStats = async () => {
     const res = await api.get("/api/academic-sessions/stats");
-    setStatData(res.data.data)
-    console.log("dataaa: ", res.data.data)
+    setStatData(res.data.data);
+    console.log("dataaa: ", res.data.data);
   };
 
   const refreshSessions = async () => {
-    await Promise.all([fetchSessions(), fetchStats()]);
-    setLoaded(true);
+    try {
+      setLoading(true);
+      await Promise.all([fetchSessions(), fetchStats()]);
+      setLoaded(true);
+    } finally{
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -42,6 +49,10 @@ const AcademicSession = () => {
       refreshSessions();
     }
   }, [loaded]);
+
+  if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="space-y-6">
@@ -57,7 +68,7 @@ const AcademicSession = () => {
         </p>
       </div>
 
-      <SessionStats statData={statData}/>
+      <SessionStats statData={statData} />
       <SessionsTable sessions={sessions} onSuccess={refreshSessions} />
       <CreateSessionCard onSuccess={refreshSessions} />
     </div>

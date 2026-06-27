@@ -59,6 +59,7 @@ export const useClassStore = create<ClassStore>((set) => ({
 
   refreshClasses: async () => {
     try {
+      set({ loading: true });
       const [
         classesRes,
         nonClassTeachersRes,
@@ -80,6 +81,7 @@ export const useClassStore = create<ClassStore>((set) => ({
         academicSessions: academicSessionsRes.data.data,
 
         loaded: true,
+        loading: false,
       });
     } catch (error) {}
   },

@@ -250,18 +250,52 @@ const NotFound = () => {
                   </Link>
                   <button
                     type="button"
-                    onClick={() => navigate(-1)}
                     className="
-                      inline-flex
-                      px-5 py-3
-                      text-sm font-semibold text-textPrimary
-                      bg-card
+                      h-12 w-[11.5rem]
+                      px-5
+                      text-center text-textPrimary font-semibold
+                      bg-white
                       rounded-2xl border border-border
-                      transition-all
-                      items-center justify-center gap-2 duration-300 focus:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-primary hover:scale-[0.95] hover:bg-surface/50 hover:border-transparent hover:shadow-sm
+                      transition-all shadow-sm
+                      relative group
+                      hover:ring-2 hover:ring-offset-1 hover:ring-primary
+
                     "
                   >
-                    Back
+                    <div
+                      className="
+                        flex z-10
+                        h-10 w-1/4
+                        bg-gradient-to-r from-primary via-[#417af4] to-[#5a8dfb]
+                        rounded-xl
+                        items-center justify-center absolute left-1 top-[4px] group-hover:w-[11rem] duration-500
+                      "
+                      onClick={() => navigate(-1)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 1024 1024"
+                        height="25px"
+                        width="25px"
+                      >
+                        <path
+                          d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+                          fill="#fff"
+                        />
+                        <path
+                          d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+                          fill="#fff"
+                        />
+                      </svg>
+                    </div>
+                    <p
+                      className="
+                        text-sm
+                        translate-x-2
+                      "
+                    >
+                      Go Back
+                    </p>
                   </button>
                 </div>
               </div>

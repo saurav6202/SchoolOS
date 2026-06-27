@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 import SchoolSettingsCard from "../../components/admin/settings/SchoolSettingsCard";
+import PageLoader from "../../components/common/PageLoader";
+// import { delay } from "../../utils/delay";
 
 type Settings = {
   schoolName: string;
@@ -13,6 +15,8 @@ type Settings = {
 };
 
 const SchoolSettings = () => {
+  const [loading, setLoading] = useState(true);
+
   const [settings, setSettings] = useState<Settings>();
   const fetchSettings = async () => {
     const res = await api.get("/api/school-settings");
@@ -21,6 +25,20 @@ const SchoolSettings = () => {
   useEffect(() => {
     fetchSettings();
   }, []);
+
+  useEffect(() => {
+    const loadPage = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 10000));
+      setLoading(false);
+    };
+
+    loadPage();
+  }, []);
+
+  if (loading) {
+  return <PageLoader />;
+}
+
   return (
     <div className="space-y-6">
       {/* PAGE HEADER */}

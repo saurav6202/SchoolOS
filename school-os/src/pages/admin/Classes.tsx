@@ -4,6 +4,7 @@ import ClassStats from "../../components/admin/classes/ClassStats";
 import ClassList from "../../components/admin/classes/ClassList";
 import { useClassStore } from "../../store/classStore";
 import { useTeachersStore } from "../../store/teachersStore";
+import PageLoader from "../../components/common/PageLoader";
 
 const Classes = () => {
   const {
@@ -26,6 +27,10 @@ const Classes = () => {
       refreshTeachers();
     }
   }, [loaded, refreshClasses]);
+
+   if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div

@@ -4,15 +4,26 @@ import AddStudentForm from "../../components/admin/students/AddStudentForm";
 import UploadStudentsCard from "../../components/admin/students/UploadStudentsCard";
 import { useEffect } from "react";
 import { useStudentsStore } from "../../store/students";
+import PageLoader from "../../components/common/PageLoader";
 
 const Students = () => {
-  const { totalClasses, totalStudents, refreshStudents, loaded } = useStudentsStore();
+  const {
+    totalClasses,
+    totalStudents,
+    refreshStudents,
+    loaded,
+    loading,
+  } = useStudentsStore();
 
   useEffect(() => {
-    if(!loaded){
+    if (!loaded) {
       refreshStudents();
     }
   }, [loaded]);
+
+  if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="space-y-6">
