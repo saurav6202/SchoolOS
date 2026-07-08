@@ -1,10 +1,14 @@
-import { Bell, Search, ChevronDown, BellOff } from "lucide-react";
+import { Bell, Search, ChevronDown, BellOff, Menu } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 import { capitalize } from "../utils/string";
 import { usePushNotifications } from "../hooks/usePushNotifications";
 import Loader from "./common/Loader";
 
-const Navbar = () => {
+type NavbarProps = {
+  onMenuClick: () => void;
+};
+
+const Navbar = ({ onMenuClick }: NavbarProps) => {
   const { user } = useAuthStore();
   const { permission, enableNotifications, loading } = usePushNotifications();
 
@@ -13,17 +17,23 @@ const Navbar = () => {
       className="
         z-30 flex
         h-[72px]
-        px-6
+        px-4 sm:px-6
         bg-surface/90
         border-b border-border
-        sticky top-0 items-center justify-between backdrop-blur-md
+        sticky top-0 items-center lg:justify-between backdrop-blur-md
+        justify-end
       "
     >
+      <button onClick={onMenuClick} className="lg:hidden mr-auto">
+        <Menu size={24} />
+      </button>
+
       {/* SEARCH */}
       <div
         className="
           w-full max-w-md
           relative
+          hidden lg:block
         "
       >
         <Search
@@ -106,8 +116,8 @@ const Navbar = () => {
         <button
           className="
             flex
-            px-3 py-2
-            rounded-xl border border-border
+            md:px-3 py-2
+            rounded-xl md:border border-border
             items-center gap-3 hover:bg-background
           "
         >
@@ -126,7 +136,7 @@ const Navbar = () => {
 
           <div
             className="
-              text-left
+             hidden sm:block text-left
             "
           >
             <p
@@ -150,6 +160,7 @@ const Navbar = () => {
             size={16}
             className="
               text-textSecondary
+              hidden sm:block
             "
           />
         </button>

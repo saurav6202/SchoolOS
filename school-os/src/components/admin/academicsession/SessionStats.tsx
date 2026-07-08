@@ -1,10 +1,19 @@
 import { CalendarDays, CalendarCheck, Clock3 } from "lucide-react";
 import StatCard from "../../common/StatCard";
 
+interface StatDataType {
+  activeSession: {
+    isActive: boolean;
+    name: string;
+    _id: string;
+  };
+  totalSessions: number;
+}
+
 const SessionStats = ({
   statData,
 }: {
-  statData: { activeSession: null | string; totalSessions: number };
+  statData: StatDataType;
 }) => {
   const stats = [
     {
@@ -16,7 +25,7 @@ const SessionStats = ({
     },
     {
       title: "Active Session",
-      value:  statData?.activeSession ? statData.activeSession : "!",
+      value:  statData?.activeSession ? statData.activeSession.name : "!",
       icon: CalendarCheck,
       iconBg: "bg-success/10",
       iconColor: "text-success",

@@ -63,7 +63,7 @@ const SessionsTable = ({
 
   const handleDelete = async (id: string) => {
     try {
-      const confirmDelete = window.confirm("Delete this class?");
+      const confirmDelete = window.confirm("Delete this Session?");
       console.log(id);
 
       if (confirmDelete) {

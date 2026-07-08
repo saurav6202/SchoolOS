@@ -13,10 +13,23 @@ interface Session {
   isActive: boolean;
 }
 
+interface StatDataType {
+  activeSession: {
+    isActive: boolean;
+    name: string;
+    _id: string;
+  };
+  totalSessions: number;
+}
+
 const AcademicSession = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
-  const [statData, setStatData] = useState({
-    activeSession: null,
+  const [statData, setStatData] = useState<StatDataType>({
+    activeSession: {
+      isActive: false,
+      name: "0000-00",
+      _id: "",
+    },
     totalSessions: 0,
   });
 
@@ -39,7 +52,7 @@ const AcademicSession = () => {
       setLoading(true);
       await Promise.all([fetchSessions(), fetchStats()]);
       setLoaded(true);
-    } finally{
+    } finally {
       setLoading(false);
     }
   };

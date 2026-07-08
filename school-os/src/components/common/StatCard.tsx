@@ -10,9 +10,9 @@ type Stat = {
 
 const StatCard = ({ stat }: { stat: Stat }) => {
   return (
-     <div
-          key={stat.title}
-          className="
+    <div
+      key={stat.title}
+      className="
             rounded-2xl
             border
             border-border
@@ -23,33 +23,33 @@ const StatCard = ({ stat }: { stat: Stat }) => {
             duration-300
             hover:shadow-lg
           "
-        >
-          <div className="flex items-start justify-between">
-            <div>
-              <p
-                className="
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <p
+            className="
                   text-sm
                   font-medium
                   text-textSecondary
                 "
-              >
-                {stat.title}
-              </p>
+          >
+            {stat.title}
+          </p>
 
-              <h2
-                className="
+          <h2
+            className="
                   mt-3
                   text-5xl
                   font-bold
                   text-textPrimary
                 "
-              >
-                {stat.value}
-              </h2>
-            </div>
+          >
+            {stat.value}
+          </h2>
+        </div>
 
-            <div
-              className={`
+        <div
+          className={`
                 flex
                 h-16
                 w-16
@@ -58,11 +58,11 @@ const StatCard = ({ stat }: { stat: Stat }) => {
                 rounded-2xl
                 ${stat.iconBg}
               `}
-            >
-              <stat.icon size={30} className={stat.iconColor} />
-            </div>
-          </div>
+        >
+          <stat.icon size={30} className={stat.iconColor} />
         </div>
+      </div>
+    </div>
   );
 };
 
