@@ -163,13 +163,25 @@ const AddClassForm = ({
           <input
             type="number"
             placeholder="e.g. 8"
+            {...register("name", {
+              required: "Class name is required",
+              valueAsNumber: true,
+              min: {
+                value: 1,
+                message: "Class must be at least 1",
+              },
+              max: {
+                value: 12,
+                message: "Class cannot exceed 12",
+              },
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              outline-none focus:border-primary
-            "
+    w-full
+    px-4 py-3
+    rounded-xl border border-border
+    transition-all
+    outline-none focus:border-primary
+  "
           />
           {errors.name && (
             <p
@@ -197,13 +209,17 @@ const AddClassForm = ({
           </label>
 
           <select
+            defaultValue=""
+            {...register("section", {
+              required: "Section is required",
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              outline-none focus:border-primary
-            "
+    w-full
+    px-4 py-3
+    rounded-xl border border-border
+    transition-all
+    outline-none focus:border-primary
+  "
           >
             <option value="" disabled>
               Select Section
@@ -242,13 +258,16 @@ const AddClassForm = ({
           </label>
 
           <select
+            {...register("academicYear", {
+              required: "Academic year is required",
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              outline-none focus:border-primary
-            "
+    w-full
+    px-4 py-3
+    rounded-xl border border-border
+    transition-all
+    outline-none focus:border-primary
+  "
           >
             <option value="">Select Academic Year</option>
 

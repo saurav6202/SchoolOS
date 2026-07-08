@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 import SchoolSettingsCard from "../../components/admin/settings/SchoolSettingsCard";
-import PageLoader from "../../components/ui/PageLoader";
+// import PageLoader from "../../components/ui/PageLoader";
 // import { delay } from "../../utils/delay";
 
 type Settings = {

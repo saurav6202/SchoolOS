@@ -53,7 +53,7 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
       "
     >
       {/* Header */}
-     <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3">
         <div
           className="
             flex
@@ -102,6 +102,9 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="text"
           placeholder="Student Name"
+          {...register("name", {
+            required: "Student name is required",
+          })}
           className={inputClass}
         />
         {errors.name && (
@@ -119,7 +122,15 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="number"
           placeholder="Admission Number"
-         className={inputClass}
+          {...register("admissionNo", {
+            required: "Admission number is required",
+            valueAsNumber: true,
+            min: {
+              value: 1,
+              message: "Admission number must be greater than 0",
+            },
+          })}
+          className={inputClass}
         />
         {errors.admissionNo && (
           <p
@@ -140,20 +151,24 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
           "
         >
           <select
+            defaultValue=""
+            {...register("className", {
+              required: "Please select a class",
+            })}
             className="
-              w-full
-              px-4 py-3
-              text-sm
-              rounded-xl border border-border
-              transition-colors
-              outline-none focus:border-primary
-              sm:text-base
-            "
+    w-full
+    px-4 py-3
+    text-sm
+    rounded-xl border border-border
+    transition-colors
+    outline-none focus:border-primary
+    sm:text-base
+  "
           >
             <option value="">Select Class</option>
 
             {[...Array(10)].map((_, index) => (
-              <option key={index} value={index + 1}>
+              <option key={index} value={String(index + 1)}>
                 Class {index + 1}
               </option>
             ))}
@@ -168,17 +183,20 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
               {errors.className?.message}
             </p>
           )}
-
           <select
+            defaultValue=""
+            {...register("section", {
+              required: "Please select a section",
+            })}
             className="
-              w-full
-              px-4 py-3
-              text-sm
-              rounded-xl border border-border
-              transition-colors
-              outline-none focus:border-primary
-              sm:text-base
-            "
+    w-full
+    px-4 py-3
+    text-sm
+    rounded-xl border border-border
+    transition-colors
+    outline-none focus:border-primary
+    sm:text-base
+  "
           >
             <option value="">Section</option>
 
@@ -204,7 +222,15 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="number"
           placeholder="Roll Number"
-         className={inputClass}
+          {...register("rollNumber", {
+            required: "Roll number is required",
+            valueAsNumber: true,
+            min: {
+              value: 1,
+              message: "Roll number must be greater than 0",
+            },
+          })}
+          className={inputClass}
         />
         {errors.rollNumber && (
           <p
@@ -221,7 +247,10 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="text"
           placeholder="Father Name"
-         className={inputClass}
+          {...register("fatherName", {
+            required: "Father name is required",
+          })}
+          className={inputClass}
         />
         {errors.fatherName && (
           <p
@@ -238,7 +267,10 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="text"
           placeholder="Mother Name"
-         className={inputClass}
+          {...register("motherName", {
+            required: "Mother name is required",
+          })}
+          className={inputClass}
         />
         {errors.motherName && (
           <p
@@ -255,7 +287,19 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         <input
           type="tel"
           placeholder="Mobile Number"
-         className={inputClass}
+          {...register("mobile", {
+            required: "Mobile number is required",
+            valueAsNumber: true,
+            min: {
+              value: 1000000000,
+              message: "Enter a valid 10-digit mobile number",
+            },
+            max: {
+              value: 9999999999,
+              message: "Enter a valid 10-digit mobile number",
+            },
+          })}
+          className={inputClass}
         />
         {errors.mobile && (
           <p

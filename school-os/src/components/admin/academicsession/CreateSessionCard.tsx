@@ -133,16 +133,25 @@ const CreateSessionCard = ({
           <input
             type="text"
             readOnly
+            {...register("name", {
+              required: "Session name is required",
+            })}
             className="
-              w-full
-              px-4 py-3
-              text-textPrimary
-              bg-background
-              rounded-xl border border-border
-              cursor-not-allowed
-              outline-none
-            "
+                w-full
+                px-4 py-3
+                text-textPrimary
+                bg-background
+                rounded-xl border border-border
+                cursor-not-allowed
+                outline-none
+              "
           />
+
+          {errors.name && (
+            <p className="ml-2 mt-1 text-sm text-red-500">
+              {errors.name.message}
+            </p>
+          )}
         </div>
 
         {/* START DATE */}
@@ -159,13 +168,23 @@ const CreateSessionCard = ({
 
           <input
             type="date"
+            {...register("startDate", {
+              required: "Start date is required",
+              onChange: (e) => generateSessionName(e.target.value),
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              outline-none focus:border-primary
-            "
+            w-full
+            px-4 py-3
+            rounded-xl border border-border
+            outline-none focus:border-primary
+             "
           />
+
+          {errors.startDate && (
+            <p className="ml-2 mt-1 text-sm text-red-500">
+              {errors.startDate.message}
+            </p>
+          )}
 
           {errors.startDate && (
             <p
@@ -190,10 +209,16 @@ const CreateSessionCard = ({
           >
             End Date
           </label>
-
           <input
             type="date"
             min={startDate}
+            {...register("endDate", {
+              required: "End date is required",
+              validate: (value) =>
+                !startDate ||
+                value >= startDate ||
+                "End date must be after start date",
+            })}
             className="
               w-full
               px-4 py-3
@@ -202,6 +227,11 @@ const CreateSessionCard = ({
             "
           />
 
+          {errors.endDate && (
+            <p className="ml-2 mt-1 text-sm text-red-500">
+              {errors.endDate.message}
+            </p>
+          )}
           {errors.endDate && (
             <p
               className="

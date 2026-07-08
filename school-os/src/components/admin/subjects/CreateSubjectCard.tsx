@@ -120,13 +120,16 @@ const CreateSubjectCard = ({
           <input
             type="text"
             placeholder="Mathematics"
+            {...register("name", {
+              required: "Subject name is required",
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              outline-none focus:border-primary
-            "
+    w-full
+    px-4 py-3
+    rounded-xl border border-border
+    transition-all
+    outline-none focus:border-primary
+  "
           />
 
           {errors.name && (
@@ -152,17 +155,20 @@ const CreateSubjectCard = ({
           >
             Subject Code
           </label>
-
           <input
             type="text"
             placeholder="MATH"
+            {...register("code", {
+              required: "Subject code is required",
+              setValueAs: (value) => value.trim().toUpperCase(),
+            })}
             className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              uppercase outline-none focus:border-primary
-            "
+    w-full
+    px-4 py-3
+    rounded-xl border border-border
+    transition-all
+    uppercase outline-none focus:border-primary
+  "
           />
 
           {errors.code && (
@@ -211,9 +217,10 @@ const CreateSubjectCard = ({
               <input
                 type="radio"
                 value="core"
-                className="
-                  hidden
-                "
+                {...register("category", {
+                  required: "Please select a category",
+                })}
+                className="hidden"
               />
 
               <p
@@ -250,9 +257,10 @@ const CreateSubjectCard = ({
               <input
                 type="radio"
                 value="optional"
-                className="
-                  hidden
-                "
+                {...register("category", {
+                  required: "Please select a category",
+                })}
+                className="hidden"
               />
 
               <p
@@ -274,6 +282,17 @@ const CreateSubjectCard = ({
             </label>
           </div>
         </div>
+
+        {errors.category && (
+          <p
+            className="
+      mt-2
+      text-sm text-error
+    "
+          >
+            {errors.category.message}
+          </p>
+        )}
 
         {/* BUTTON */}
         <button
