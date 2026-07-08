@@ -4,7 +4,7 @@ import api from "../../../api/api";
 import Select from "react-select";
 import { useState } from "react";
 import { showError, showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 interface FormProps {
   nonAssignedClasses: Array<{ name: number; section: string; _id: string }>;
@@ -17,7 +17,6 @@ const AddTeacherForm = ({
   subjects,
   onSuccess,
 }: FormProps) => {
-  
   type FormDataType = {
     name: string;
     email: string;
@@ -44,7 +43,7 @@ const AddTeacherForm = ({
       reset();
     } catch (error: any) {
       showError(error.response.data.message);
-    }finally{
+    } finally {
       setSubmitting(false);
     }
   };
@@ -71,12 +70,12 @@ const AddTeacherForm = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
+       p-4
         bg-surface
-        p-6
+        rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
@@ -105,7 +104,11 @@ const AddTeacherForm = ({
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSubmit(submitFnc)} className="mt-6 space-y-4">
+      <form
+        onSubmit={handleSubmit(submitFnc)}
+        className="  mt-5 space-y-4
+          sm:mt-6"
+      >
         <input
           type="text"
           placeholder="Teacher Name"

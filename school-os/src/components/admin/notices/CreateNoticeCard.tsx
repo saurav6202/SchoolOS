@@ -11,7 +11,7 @@ import { useState } from "react";
 import { capitalize } from "../../../utils/string";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 type Audience = "students" | "teachers" | "everyone";
 
@@ -113,36 +113,40 @@ const CreateNoticeCard = () => {
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
-        bg-surface
         p-6
+        bg-surface
+        rounded-2xl border border-border
         shadow-card
       "
     >
       {/* HEADER */}
-      <div className="flex items-center gap-3">
+      <div
+        className="
+          flex
+          items-center gap-3
+        "
+      >
         <div
           className="
             flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-xl
+            h-12 w-12
             bg-primaryLight
+            rounded-xl
+            items-center justify-center
           "
         >
-          <BellPlus size={22} className="text-primary" />
+          <BellPlus
+            size={22}
+            className="
+              text-primary
+            "
+          />
         </div>
 
         <div>
           <h2
             className="
-              text-lg
-              font-semibold
-              text-textPrimary
+              text-lg font-semibold text-textPrimary
             "
           >
             Create Notice
@@ -150,8 +154,7 @@ const CreateNoticeCard = () => {
 
           <p
             className="
-              text-sm
-              text-textSecondary
+              text-sm text-textSecondary
             "
           >
             Publish announcements for students and teachers
@@ -160,16 +163,19 @@ const CreateNoticeCard = () => {
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="
+          mt-6 space-y-6
+        "
+      >
         {/* TITLE */}
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Notice Title
@@ -180,18 +186,14 @@ const CreateNoticeCard = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter notice title"
+            required
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
+              px-4 py-3
+              rounded-xl border border-border
               transition-all
-              focus:border-primary
+              outline-none focus:border-primary
             "
-            required
           />
         </div>
 
@@ -199,11 +201,9 @@ const CreateNoticeCard = () => {
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Notice Content
@@ -214,36 +214,39 @@ const CreateNoticeCard = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write notice here..."
+            required
             className="
               w-full
-              resize-none
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              transition-all
-              focus:border-primary
+              px-4 py-3
+              rounded-xl border border-border
+              resize-none transition-all
+              outline-none focus:border-primary
             "
-            required
           />
         </div>
-        <div className="flex justify-between items-center">
+        <div
+          className="
+            flex
+            justify-between items-center
+          "
+        >
           {/* AUDIENCE */}
           <div>
             <h3
               className="
-              mb-3
-              text-sm
-              font-medium
-              text-textPrimary
-            "
+                mb-3
+                text-sm font-medium text-textPrimary
+              "
             >
               Audience
             </h3>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div
+              className="
+                grid grid-cols-3
+                gap-3
+              "
+            >
               {audienceOptions.map((option) => (
                 <button
                   key={option.value}
@@ -251,13 +254,10 @@ const CreateNoticeCard = () => {
                   onClick={() => setAudience(option.value as Audience)}
                   className={`
                     flex
-                    items-center
-                    gap-2
-                    rounded-xl
-                    border
                     p-4
+                    rounded-xl border
                     transition-all
-
+                    items-center gap-2
                     ${
                       audience === option.value
                         ? "border-primary bg-primaryLight"
@@ -267,7 +267,13 @@ const CreateNoticeCard = () => {
                 >
                   <option.icon size={20} />
 
-                  <span className="text-sm font-medium">{option.label}</span>
+                  <span
+                    className="
+                      text-sm font-medium
+                    "
+                  >
+                    {option.label}
+                  </span>
                 </button>
               ))}
             </div>
@@ -277,16 +283,19 @@ const CreateNoticeCard = () => {
           <div>
             <h3
               className="
-              mb-3
-              text-sm
-              font-medium
-              text-textPrimary
-            "
+                mb-3
+                text-sm font-medium text-textPrimary
+              "
             >
               Priority
             </h3>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div
+              className="
+                grid grid-cols-3
+                gap-3
+              "
+            >
               {priorityOptions.map((option) => (
                 <button
                   key={option.value}
@@ -294,22 +303,22 @@ const CreateNoticeCard = () => {
                   onClick={() => setPriority(option.value as Priority)}
                   className={`
                     flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    border
                     p-3
+                    rounded-xl border
                     transition-all
-
-                    ${
-                      priority === option.value ? option.color : "border-border"
-                    }
+                    items-center justify-center gap-2
+                    ${priority === option.value ? option.color : "border-border"}
                   `}
                 >
                   <option.icon size={18} />
 
-                  <span className="font-medium">{option.label}</span>
+                  <span
+                    className="
+                      font-medium
+                    "
+                  >
+                    {option.label}
+                  </span>
                 </button>
               ))}
             </div>
@@ -319,29 +328,28 @@ const CreateNoticeCard = () => {
         {/* PREVIEW */}
         <div
           className="
-            rounded-xl
-            border
-            border-border
-            bg-background
             p-4
+            bg-background
+            rounded-xl border border-border
           "
         >
           <h3
             className="
               mb-3
-              text-sm
-              font-medium
-              text-textPrimary
+              text-sm font-medium text-textPrimary
             "
           >
             Notice Preview
           </h3>
 
-          <div className="space-y-2">
+          <div
+            className="
+              space-y-2
+            "
+          >
             <p
               className="
-                font-semibold
-                text-textPrimary
+                font-semibold text-textPrimary
               "
             >
               {title || "Notice title will appear here"}
@@ -349,23 +357,25 @@ const CreateNoticeCard = () => {
 
             <p
               className="
-                text-sm
-                text-textSecondary
+                text-sm text-textSecondary
               "
             >
               {content || "Notice content preview..."}
             </p>
 
-            <div className="flex gap-2 pt-2">
+            <div
+              className="
+                flex
+                pt-2
+                gap-2
+              "
+            >
               <span
                 className="
-                  rounded-full
+                  px-3 py-1
+                  text-xs font-medium text-primary
                   bg-primaryLight
-                  px-3
-                  py-1
-                  text-xs
-                  font-medium
-                  text-primary
+                  rounded-full
                 "
               >
                 {capitalize(audience)}
@@ -373,13 +383,10 @@ const CreateNoticeCard = () => {
 
               <span
                 className="
-                  rounded-full
+                  px-3 py-1
+                  text-xs font-medium text-primaryDark
                   bg-primaryLight
-                  px-3
-                  py-1
-                  text-xs
-                  font-medium
-                  text-primaryDark
+                  rounded-full
                 "
               >
                 {capitalize(priority)}
@@ -393,21 +400,23 @@ const CreateNoticeCard = () => {
           type="submit"
           disabled={isPublishing}
           className="
-            w-full
-            rounded-xl
-            bg-primary
-            py-3
-            font-medium
-            text-white
-            transition-all
-            hover:bg-primaryDark
-            disabled:opacity-50
             flex
-            justify-center
+            w-full
+            py-3
+            font-medium text-white
+            bg-primary
+            rounded-xl
+            transition-all
+            hover:bg-primaryDark disabled:opacity-50 justify-center
           "
         >
           {isPublishing ? (
-            <div className="gap-3 flex items-center">
+            <div
+              className="
+                flex
+                gap-3 items-center
+              "
+            >
               Publishing... <Loader />
             </div>
           ) : (

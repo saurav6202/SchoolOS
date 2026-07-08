@@ -1,5 +1,5 @@
 import { UserCog, UserStar, User } from "lucide-react";
-import StatCard from "../../common/StatCard";
+import StatCard from "../../ui/StatCard";
 
 const TeacherStats = ({
   totalTeachers,
@@ -37,14 +37,14 @@ const TeacherStats = ({
   return (
     <section
       className="
-        grid
-        gap-6
-        md:grid-cols-2
-        xl:grid-cols-3
+        grid grid-cols-2
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
       "
     >
       {stats.map((stat) => (
-        <StatCard stat={stat}/>
+        <StatCard stat={stat} key={stat.title}/>
       ))}
     </section>
   );

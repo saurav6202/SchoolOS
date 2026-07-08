@@ -1,5 +1,5 @@
 import { CalendarDays, CalendarCheck, Clock3 } from "lucide-react";
-import StatCard from "../../common/StatCard";
+import StatCard from "../../ui/StatCard";
 
 interface StatDataType {
   activeSession: {
@@ -10,11 +10,7 @@ interface StatDataType {
   totalSessions: number;
 }
 
-const SessionStats = ({
-  statData,
-}: {
-  statData: StatDataType;
-}) => {
+const SessionStats = ({ statData }: { statData: StatDataType }) => {
   const stats = [
     {
       title: "Total Sessions",
@@ -25,7 +21,7 @@ const SessionStats = ({
     },
     {
       title: "Active Session",
-      value:  statData?.activeSession ? statData.activeSession.name : "!",
+      value: statData?.activeSession ? statData.activeSession.name : "!",
       icon: CalendarCheck,
       iconBg: "bg-success/10",
       iconColor: "text-success",
@@ -40,9 +36,16 @@ const SessionStats = ({
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div
+      className="
+        grid grid-cols-2
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
+      "
+    >
       {stats.map((stat) => (
-        <StatCard stat={stat}/>
+        <StatCard stat={stat} key={stat.title} />
       ))}
     </div>
   );

@@ -3,12 +3,12 @@ import { UserCog, Save } from "lucide-react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import Select from "react-select";
 
-import Modal from "../../common/Modal";
-import Button from "../../common/Button";
+import Modal from "../../ui/Modal";
+import Button from "../../ui/Button";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
 import { useTeachersStore } from "../../../store/teachersStore";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 type Teacher = {
   _id: string;
@@ -116,16 +116,19 @@ const EditClassModal = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Edit Class">
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-5">
+      <form
+        onSubmit={handleSubmit(handleSubmitForm)}
+        className="
+          space-y-5
+        "
+      >
         {/* CLASS NAME */}
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Class Name
@@ -137,13 +140,10 @@ const EditClassModal = ({
             disabled
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              bg-background
-              px-4
-              py-3
+              px-4 py-3
               text-textSecondary
+              bg-background
+              rounded-xl border border-border
             "
           />
         </div>
@@ -152,11 +152,9 @@ const EditClassModal = ({
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Section
@@ -168,13 +166,9 @@ const EditClassModal = ({
             disabled
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              focus:border-primary
+              px-4 py-3
+              rounded-xl border border-border
+              outline-none focus:border-primary
             "
           />
         </div>
@@ -183,20 +177,21 @@ const EditClassModal = ({
         <div>
           <label
             className="
-              mb-2
               flex
-              items-center
-              gap-2
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
+              items-center gap-2
             "
           >
             <UserCog size={16} />
             Subjects
           </label>
 
-          <div className="z-20">
+          <div
+            className="
+              z-20
+            "
+          >
             <Controller
               name="subjects"
               control={control}
@@ -252,7 +247,12 @@ const EditClassModal = ({
             />
 
             {errors.subjects && (
-              <p className="mt-2 ml-2 text-sm text-red-500">
+              <p
+                className="
+                  mt-2 ml-2
+                  text-sm text-red-500
+                "
+              >
                 {errors.subjects.message}
               </p>
             )}
@@ -262,20 +262,21 @@ const EditClassModal = ({
         <div>
           <label
             className="
-              mb-2
               flex
-              items-center
-              gap-2
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
+              items-center gap-2
             "
           >
             <UserCog size={16} />
             Teacher
           </label>
 
-          <div className="z-20">
+          <div
+            className="
+              z-20
+            "
+          >
             <Controller
               name="classTeacher"
               control={control}
@@ -346,17 +347,16 @@ const EditClassModal = ({
         <div
           className="
             flex
-            justify-end
-            gap-3
             pt-4
+            justify-end gap-3
           "
         >
           <Button
+            handleClick={onClose}
             className="
               bg-slate-500
               hover:bg-slate-600
             "
-            handleClick={onClose}
           >
             Cancel
           </Button>

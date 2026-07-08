@@ -3,7 +3,7 @@ import api from "../../api/api";
 import CreateSessionCard from "../../components/admin/academicsession/CreateSessionCard";
 import SessionsTable from "../../components/admin/academicsession/SessionsTable";
 import SessionStats from "../../components/admin/academicsession/SessionStats";
-import PageLoader from "../../components/common/PageLoader";
+import PageLoader from "../../components/ui/PageLoader";
 
 interface Session {
   _id: string;
@@ -68,14 +68,27 @@ const AcademicSession = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div
+      className="
+        space-y-6
+      "
+    >
       {/* PAGE HEADER */}
       <div>
-        <h1 className="text-2xl font-bold text-textPrimary">
+        <h1
+          className="
+            text-2xl font-bold text-textPrimary
+          "
+        >
           Academic Sessions
         </h1>
 
-        <p className="mt-1 text-textSecondary">
+        <p
+          className="
+            mt-1
+            text-textSecondary
+          "
+        >
           Manage academic years and control the active session used across the
           school.
         </p>

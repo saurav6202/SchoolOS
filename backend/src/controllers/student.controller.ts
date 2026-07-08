@@ -103,12 +103,13 @@ export const getStudent = async (req: Request, res: Response) => {
         "classId",
       );
       return res.json({
-        data: [theStudent],
+        data: theStudent ? [theStudent] : [],
       });
     }
 
     return res.json({
       success: true,
+      data: []
     });
   } catch (error) {}
 };

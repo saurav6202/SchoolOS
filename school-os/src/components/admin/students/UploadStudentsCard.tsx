@@ -11,7 +11,8 @@ import { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import api from "../../../api/api";
 import { showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
+import Button from "../../ui/Button";
 
 const UploadStudentsCard = ({
   onSuccess,
@@ -112,36 +113,42 @@ const UploadStudentsCard = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
+        p-4
         bg-surface
-        p-6
+        rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
-      <div className="flex items-center gap-3">
+      <div
+        className="
+          flex
+          items-center gap-3
+        "
+      >
         <div
           className="
             flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-xl
+            h-12 w-12
             bg-primaryLight
+            rounded-xl
+            items-center justify-center
           "
         >
-          <Upload size={22} className="text-primary" />
+          <Upload
+            size={22}
+            className="
+              text-primary
+            "
+          />
         </div>
 
         <div>
           <h2
             className="
-              text-lg
-              font-semibold
-              text-textPrimary
+              text-lg font-semibold text-textPrimary
             "
           >
             Bulk Student Upload
@@ -149,8 +156,7 @@ const UploadStudentsCard = ({
 
           <p
             className="
-              text-sm
-              text-textSecondary
+              text-sm text-textSecondary
             "
           >
             Import hundreds of students using Excel
@@ -161,20 +167,22 @@ const UploadStudentsCard = ({
       {/* TEMPLATE */}
       <div
         className="
-          mt-6
-          rounded-xl
-          border
-          border-border
+          mt-6 p-4
           bg-background
-          p-4
+          rounded-xl border border-border
         "
       >
-        <div className="flex items-center justify-between">
+        <div
+          className="
+            flex flex-col
+            gap-4
+            sm:flex-row sm:items-center sm:justify-between
+          "
+        >
           <div>
             <h3
               className="
-                font-medium
-                text-textPrimary
+                font-medium text-textPrimary
               "
             >
               Download Template
@@ -183,8 +191,7 @@ const UploadStudentsCard = ({
             <p
               className="
                 mt-1
-                text-sm
-                text-textSecondary
+                text-sm text-textSecondary
               "
             >
               Download the sample Excel template before uploading.
@@ -192,24 +199,21 @@ const UploadStudentsCard = ({
           </div>
 
           <button
-            className="
-              flex
-              items-center
-              gap-2
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-2
-              font-medium
-              transition-all
-              hover:bg-surface
-            "
             onClick={() => {
               window.open(
                 `${import.meta.env.VITE_API_URL}/students/download-template`,
               );
             }}
+            className="
+              inline-flex
+              w-full
+              px-4 py-2.5
+              text-sm font-medium
+              rounded-xl border border-border
+              transition-colors
+              justify-center items-center gap-2 hover:bg-surface
+              sm:w-auto
+            "
           >
             <Download size={18} />
             Template
@@ -221,18 +225,14 @@ const UploadStudentsCard = ({
       <div
         onClick={() => inputRef.current?.click()}
         className="
-          mt-6
-          cursor-pointer
-          rounded-2xl
-          border-2
-          border-dashed
-          border-border
-          bg-background
-          p-10
+          mt-6 p-6
           text-center
-          transition-all
-          hover:border-primary
-          hover:bg-primaryLight/30
+          bg-background
+          rounded-2xl border-2 border-dashed border-border
+          cursor-pointer transition-all
+          hover:border-primary hover:bg-primaryLight/30
+          sm:p-8
+          lg:p-10
         "
       >
         <Upload
@@ -246,8 +246,7 @@ const UploadStudentsCard = ({
         <h3
           className="
             mt-4
-            font-semibold
-            text-textPrimary
+            font-semibold text-textPrimary
           "
         >
           Upload Student Excel File
@@ -256,8 +255,7 @@ const UploadStudentsCard = ({
         <p
           className="
             mt-2
-            text-sm
-            text-textSecondary
+            text-sm text-textSecondary
           "
         >
           Drag & Drop or Click to Browse
@@ -266,8 +264,7 @@ const UploadStudentsCard = ({
         <p
           className="
             mt-1
-            text-xs
-            text-textSecondary
+            text-xs text-textSecondary
           "
         >
           Supports .xlsx and .xls
@@ -285,34 +282,35 @@ const UploadStudentsCard = ({
       {showNote && (
         <div
           className="
-          mt-6
-          flex
-          gap-3
-          rounded-xl
-          border
-          border-warning/20
-          bg-warning/5
-          p-4
-        "
+            flex
+            mt-6 p-4
+            bg-warning/5
+            rounded-xl border border-warning/20
+            gap-3
+          "
         >
-          <AlertCircle size={18} className="mt-0.5 text-warning" />
+          <AlertCircle
+            size={18}
+            className="
+              mt-0.5
+              text-warning
+            "
+          />
 
           <div>
             <p
               className="
-              font-medium
-              text-textPrimary
-            "
+                font-medium text-textPrimary
+              "
             >
               Required Columns
             </p>
 
             <p
               className="
-              mt-1
-              text-sm
-              text-textSecondary
-            "
+                mt-1
+                text-sm text-textSecondary
+              "
             >
               Admission Number, Name, Class, Section, Roll No, Father Name,
               Mobile Number
@@ -324,22 +322,33 @@ const UploadStudentsCard = ({
       {errors.length > 0 ? (
         <div
           className="
-            mt-6
-            rounded-xl
-            border
-            border-success/20
+            mt-6 p-4
             bg-error/5
-            p-4
+            rounded-xl border border-success/20
           "
         >
-          <div className="flex gap-3 flex-col">
-            <div className="flex gap-3 items-center">
-              <CircleX size={20} className="text-error" />{" "}
+          <div
+            className="
+              flex flex-col
+              gap-3
+            "
+          >
+            <div
+              className="
+                flex
+                gap-3 items-center
+              "
+            >
+              <CircleX
+                size={20}
+                className="
+                  text-error
+                "
+              />{" "}
               <p
                 className="
-              font-medium
-              text-textPrimary
-            "
+                  font-medium text-textPrimary
+                "
               >
                 Need Corrections
               </p>
@@ -357,9 +366,8 @@ const UploadStudentsCard = ({
 
                 <p
                   className="
-                  text-sm
-                  text-textSecondary
-                "
+                    text-sm text-textSecondary
+                  "
                 >
                   {error}
                 </p>
@@ -372,32 +380,37 @@ const UploadStudentsCard = ({
           {fileName && (
             <div
               className="
-            mt-6
-            rounded-xl
-            border
-            border-success/20
-            bg-success/5
-            p-4
-          "
+                mt-6 p-4
+                bg-success/5
+                rounded-xl border border-success/20
+              "
             >
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={20} className="text-success" />
+              <div
+                className="
+                  flex
+                  items-center gap-3
+                "
+              >
+                <CheckCircle2
+                  size={20}
+                  className="
+                    text-success
+                  "
+                />
 
                 <div>
                   <p
                     className="
-                  font-medium
-                  text-textPrimary
-                "
+                      font-medium text-textPrimary
+                    "
                   >
                     {fileName}
                   </p>
 
                   <p
                     className="
-                  text-sm
-                  text-textSecondary
-                "
+                      text-sm text-textSecondary
+                    "
                   >
                     File selected successfully
                   </p>
@@ -446,24 +459,20 @@ const UploadStudentsCard = ({
       )} */}
 
       {/* ACTION */}
-      <button
+      <Button
         disabled={!fileName || isUploading}
-        onClick={handleUpload}
+        handleClick={handleUpload}
         className="
-          mt-6
           w-full
-          rounded-xl
-          bg-primary
-          py-3
-          font-medium
-          text-white
-          transition-all
-          hover:bg-primaryDark
-          disabled:cursor-not-allowed
-          disabled:opacity-50
+          mt-6
         "
       >
-        <span className="flex justify-center items-center gap-3">
+        <span
+          className="
+            flex
+            justify-center items-center gap-3
+          "
+        >
           <Import size={18} />
           {isUploading ? (
             <>
@@ -473,18 +482,32 @@ const UploadStudentsCard = ({
             "Import Students"
           )}
         </span>
-      </button>
+      </Button>
 
       {/* PREVIEW */}
       {fileName && (
-        <div className="mt-6">
-          <div className="mb-3 flex items-center gap-2">
-            <FileSpreadsheet size={18} className="text-primary" />
+        <div
+          className="
+            mt-6
+          "
+        >
+          <div
+            className="
+              flex
+              mb-3
+              items-center gap-2
+            "
+          >
+            <FileSpreadsheet
+              size={18}
+              className="
+                text-primary
+              "
+            />
 
             <h3
               className="
-                font-semibold
-                text-textPrimary
+                text-base font-semibold text-textPrimary
               "
             >
               Preview Data
@@ -493,32 +516,93 @@ const UploadStudentsCard = ({
 
           <div
             className="
-              overflow-hidden
-              rounded-xl
-              border
-              border-border
+              overflow-x-auto
+              rounded-xl border border-border
             "
           >
-            <table className="w-full">
+            <table
+              className="
+                min-w-[540px] w-full
+              "
+            >
               <thead>
-                <tr className="bg-background">
-                  <th className="p-3 text-left">Admission No</th>
-                  <th className="p-3 text-left">Name</th>
-                  <th className="p-3 text-left">Class</th>
-                  <th className="p-3 text-left">Roll</th>
+                <tr
+                  className="
+                    bg-background
+                  "
+                >
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Admission No
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Name
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Class
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Roll
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 {students.map((student, index) => (
-                  <tr key={index} className="border-t border-border">
-                    <td className="p-3">{student.AdmissionNo}</td>
-                    <td className="p-3">{student.Name}</td>
-                    <td className="p-3">
+                  <tr
+                    key={index}
+                    className="
+                      border-t border-border
+                    "
+                  >
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {student.AdmissionNo}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {student.Name}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
                       {student.Class}
                       {student.Section}
                     </td>
-                    <td className="p-3">{student.RollNo}</td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {student.RollNo}
+                    </td>
                   </tr>
                 ))}
               </tbody>

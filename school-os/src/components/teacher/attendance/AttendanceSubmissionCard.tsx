@@ -9,7 +9,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { showError, showSuccess } from "../../../utils/toast";
 import api from "../../../api/api";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 import { today } from "../../../utils/formatDate";
 import { useTeacherStore } from "../../../store/teacher/teacherStore";
 import { useAttendanceStore } from "../../../store/teacher/attendanceStore";
@@ -314,12 +314,12 @@ const AttendanceSubmissionCard = () => {
         {isHoliday && (
           <div
             className="
+              flex
               mb-6 p-4
               text-warning font-medium
               bg-warning/10
               rounded-xl border border-warning/20
-              flex justify-between
-              items-center
+              justify-between items-center
             "
           >
             🎉 Today is marked as a Holiday for this class. Attendance
@@ -327,14 +327,14 @@ const AttendanceSubmissionCard = () => {
             <button
               onClick={handleUnMarkHoliday}
               className="
-                  flex
-                  px-4 py-2
-                  text-sm font-medium text-error
-                  bg-error/10
-                  rounded-xl border border-error/20
-                  transition-all
-                  items-center gap-2 hover:bg-error/20
-                "
+                flex
+                px-4 py-2
+                text-sm font-medium text-error
+                bg-error/10
+                rounded-xl border border-error/20
+                transition-all
+                items-center gap-2 hover:bg-error/20
+              "
             >
               <SquareX size={16} />
               Unmark Holiday

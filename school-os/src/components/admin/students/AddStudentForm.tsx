@@ -1,10 +1,11 @@
 import { PlusCircle } from "lucide-react";
 import api from "../../../api/api";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { showError, showSuccess } from "../../../utils/toast";
 import { useState } from "react";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
+import { inputClass } from "../../../styles/forms";
 
 const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
   type FormDataType = {
@@ -24,8 +25,7 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
     reset,
     formState: { errors },
   } = useForm<FormDataType>();
-    const [submitting, setSubmitting] = useState(false);
-
+  const [submitting, setSubmitting] = useState(false);
 
   const submitFnc: SubmitHandler<FormDataType> = async (data) => {
     setSubmitting(true);
@@ -44,16 +44,16 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
+        p-4
         bg-surface
-        p-6
+        rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* Header */}
-      <div className="flex items-center gap-3">
+     <div className="flex items-center gap-3">
         <div
           className="
             flex
@@ -91,67 +91,63 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit(submitFnc)} className="mt-6 space-y-4">
+      <form
+        onSubmit={handleSubmit(submitFnc)}
+        className="
+          mt-5 space-y-4
+          sm:mt-6
+        "
+      >
         {/* Student Name */}
         <input
           type="text"
-          {...register("name", {
-            required: "Please enter the name",
-          })}
           placeholder="Student Name"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+          className={inputClass}
         />
         {errors.name && (
-          <p className="text-red-500 ml-2 text-sm">{errors.name?.message}</p>
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
+            {errors.name?.message}
+          </p>
         )}
 
         {/* Admission Number */}
         <input
           type="number"
-          {...register("admissionNo", {
-            required: "Please enter the admission number",
-          })}
           placeholder="Admission Number"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+         className={inputClass}
         />
         {errors.admissionNo && (
-          <p className="text-red-500 ml-2 text-sm">
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
             {errors.admissionNo?.message}
           </p>
         )}
 
         {/* Class + Section */}
-        <div className="grid grid-cols-2 gap-4">
+        <div
+          className="
+            grid grid-cols-2
+            gap-4
+          "
+        >
           <select
-            {...register("className", {
-              validate: (value) => value !== "" || "Please select the class",
-            })}
             className="
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              focus:border-primary
+              w-full
+              px-4 py-3
+              text-sm
+              rounded-xl border border-border
+              transition-colors
+              outline-none focus:border-primary
+              sm:text-base
             "
           >
             <option value="">Select Class</option>
@@ -163,23 +159,25 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
             ))}
           </select>
           {errors.className && (
-            <p className="text-red-500 ml-2 text-sm">
+            <p
+              className="
+                ml-2
+                text-red-500 text-sm
+              "
+            >
               {errors.className?.message}
             </p>
           )}
 
           <select
-            {...register("section", {
-              validate: (value) => value !== "" || "Please select a section",
-            })}
             className="
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              focus:border-primary
+              w-full
+              px-4 py-3
+              text-sm
+              rounded-xl border border-border
+              transition-colors
+              outline-none focus:border-primary
+              sm:text-base
             "
           >
             <option value="">Section</option>
@@ -191,7 +189,12 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
           </select>
 
           {errors.section && (
-            <p className="text-red-500 ml-2 text-sm">
+            <p
+              className="
+                ml-2
+                text-red-500 text-sm
+              "
+            >
               {errors.section?.message}
             </p>
           )}
@@ -200,23 +203,16 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         {/* Roll Number */}
         <input
           type="number"
-          {...register("rollNumber", {
-            required: "Enter the roll number",
-          })}
           placeholder="Roll Number"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+         className={inputClass}
         />
         {errors.rollNumber && (
-          <p className="text-red-500 ml-2 text-sm">
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
             {errors.rollNumber?.message}
           </p>
         )}
@@ -224,23 +220,16 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         {/* Father Name */}
         <input
           type="text"
-          {...register("fatherName", {
-            required: "Enter the father's name",
-          })}
           placeholder="Father Name"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+         className={inputClass}
         />
         {errors.fatherName && (
-          <p className="text-red-500 ml-2 text-sm">
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
             {errors.fatherName?.message}
           </p>
         )}
@@ -248,23 +237,16 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         {/* Mother Name */}
         <input
           type="text"
-          {...register("motherName", {
-            required: "Enter the mother's name",
-          })}
           placeholder="Mother Name"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+         className={inputClass}
         />
         {errors.motherName && (
-          <p className="text-red-500 ml-2 text-sm">
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
             {errors.motherName?.message}
           </p>
         )}
@@ -272,32 +254,28 @@ const AddStudentForm = ({ onSuccess }: { onSuccess: () => Promise<void> }) => {
         {/* Mobile */}
         <input
           type="tel"
-          {...register("mobile", {
-            required: "Enter the mobile number",
-            maxLength: {
-              value: 10,
-              message: "Enter the correct mobile number",
-            },
-          })}
           placeholder="Mobile Number"
-          className="
-            w-full
-            rounded-xl
-            border
-            border-border
-            px-4
-            py-3
-            outline-none
-            focus:border-primary
-          "
+         className={inputClass}
         />
         {errors.mobile && (
-          <p className="text-red-500 ml-2 text-sm">{errors.mobile?.message}</p>
+          <p
+            className="
+              ml-2
+              text-red-500 text-sm
+            "
+          >
+            {errors.mobile?.message}
+          </p>
         )}
 
         {/* Submit */}
 
-        <Button className="w-full" disabled={submitting}>
+        <Button
+          disabled={submitting}
+          className="
+            w-full
+          "
+        >
           {submitting ? (
             <>
               Creating... <Loader />

@@ -1,6 +1,6 @@
 import { Pencil, Trash2, User, Search } from "lucide-react";
 import { useState } from "react";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 
 const StudentEditCard = () => {
   const [name, setName] = useState("");

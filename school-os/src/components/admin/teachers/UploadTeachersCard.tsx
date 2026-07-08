@@ -11,7 +11,8 @@ import { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
+import Button from "../../ui/Button";
 
 const UploadTeachersCard = ({
   onSuccess,
@@ -105,36 +106,42 @@ const UploadTeachersCard = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
+          p-4
         bg-surface
-        p-6
+        rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
-      <div className="flex items-center gap-3">
+      <div
+        className="
+          flex
+          items-center gap-3
+        "
+      >
         <div
           className="
             flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-xl
+            h-12 w-12
             bg-primaryLight
+            rounded-xl
+            items-center justify-center
           "
         >
-          <Upload size={22} className="text-primary" />
+          <Upload
+            size={22}
+            className="
+              text-primary
+            "
+          />
         </div>
 
         <div>
           <h2
             className="
-              text-lg
-              font-semibold
-              text-textPrimary
+              text-lg font-semibold text-textPrimary
             "
           >
             Bulk Teacher Upload
@@ -142,8 +149,7 @@ const UploadTeachersCard = ({
 
           <p
             className="
-              text-sm
-              text-textSecondary
+              text-sm text-textSecondary
             "
           >
             Import hundreds of students using Excel
@@ -154,20 +160,22 @@ const UploadTeachersCard = ({
       {/* TEMPLATE */}
       <div
         className="
-          mt-6
-          rounded-xl
-          border
-          border-border
+          mt-6 p-4
           bg-background
-          p-4
+          rounded-xl border border-border
         "
       >
-        <div className="flex items-center justify-between">
+        <div
+          className="
+             flex flex-col
+            gap-4
+            sm:flex-row sm:items-center sm:justify-between
+          "
+        >
           <div>
             <h3
               className="
-                font-medium
-                text-textPrimary
+                font-medium text-textPrimary
               "
             >
               Download Template
@@ -176,8 +184,7 @@ const UploadTeachersCard = ({
             <p
               className="
                 mt-1
-                text-sm
-                text-textSecondary
+                text-sm text-textSecondary
               "
             >
               Download the sample Excel template before uploading.
@@ -185,24 +192,21 @@ const UploadTeachersCard = ({
           </div>
 
           <button
-            className="
-              flex
-              items-center
-              gap-2
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-2
-              font-medium
-              transition-all
-              hover:bg-surface
-            "
             onClick={() => {
               window.open(
                 `${import.meta.env.VITE_API_URL}/teachers/download-template`,
               );
             }}
+            className="
+               inline-flex
+              w-full
+              px-4 py-2.5
+              text-sm font-medium
+              rounded-xl border border-border
+              transition-colors
+              justify-center items-center gap-2 hover:bg-surface
+              sm:w-auto
+            "
           >
             <Download size={18} />
             Template
@@ -214,18 +218,14 @@ const UploadTeachersCard = ({
       <div
         onClick={() => inputRef.current?.click()}
         className="
-          mt-6
-          cursor-pointer
-          rounded-2xl
-          border-2
-          border-dashed
-          border-border
-          bg-background
-          p-10
+       mt-6 p-6
           text-center
-          transition-all
-          hover:border-primary
-          hover:bg-primaryLight/30
+          bg-background
+          rounded-2xl border-2 border-dashed border-border
+          cursor-pointer transition-all
+          hover:border-primary hover:bg-primaryLight/30
+          sm:p-8
+          lg:p-10
         "
       >
         <Upload
@@ -239,8 +239,7 @@ const UploadTeachersCard = ({
         <h3
           className="
             mt-4
-            font-semibold
-            text-textPrimary
+            font-semibold text-textPrimary
           "
         >
           Upload Student Excel File
@@ -249,8 +248,7 @@ const UploadTeachersCard = ({
         <p
           className="
             mt-2
-            text-sm
-            text-textSecondary
+            text-sm text-textSecondary
           "
         >
           Drag & Drop or Click to Browse
@@ -259,8 +257,7 @@ const UploadTeachersCard = ({
         <p
           className="
             mt-1
-            text-xs
-            text-textSecondary
+            text-xs text-textSecondary
           "
         >
           Supports .xlsx and .xls
@@ -278,34 +275,35 @@ const UploadTeachersCard = ({
       {showNote && (
         <div
           className="
-          mt-6
-          flex
-          gap-3
-          rounded-xl
-          border
-          border-warning/20
-          bg-warning/5
-          p-4
-        "
+            flex
+            mt-6 p-4
+            bg-warning/5
+            rounded-xl border border-warning/20
+            gap-3
+          "
         >
-          <AlertCircle size={18} className="mt-0.5 text-warning" />
+          <AlertCircle
+            size={18}
+            className="
+              mt-0.5
+              text-warning
+            "
+          />
 
           <div>
             <p
               className="
-              font-medium
-              text-textPrimary
-            "
+                font-medium text-textPrimary
+              "
             >
               Required Columns
             </p>
 
             <p
               className="
-              mt-1
-              text-sm
-              text-textSecondary
-            "
+                mt-1
+                text-sm text-textSecondary
+              "
             >
               Name, AssignedClass(class-section: 1-A), Subjects, Mobile, Email
             </p>
@@ -316,16 +314,23 @@ const UploadTeachersCard = ({
       {errors.length > 0 ? (
         <div
           className="
-            mt-6
-            rounded-xl
-            border
-            border-success/20
+            mt-6 p-4
             bg-error/5
-            p-4
+            rounded-xl border border-success/20
           "
         >
-          <div className="flex items-center gap-3">
-            <CircleX size={20} className="text-error" />
+          <div
+            className="
+              flex
+              items-center gap-3
+            "
+          >
+            <CircleX
+              size={20}
+              className="
+                text-error
+              "
+            />
             {errors.map((error) => (
               <div>
                 {/* <p
@@ -339,9 +344,8 @@ const UploadTeachersCard = ({
 
                 <p
                   className="
-                  text-sm
-                  text-textSecondary
-                "
+                    text-sm text-textSecondary
+                  "
                 >
                   {error}
                 </p>
@@ -354,32 +358,37 @@ const UploadTeachersCard = ({
           {fileName && (
             <div
               className="
-            mt-6
-            rounded-xl
-            border
-            border-success/20
-            bg-success/5
-            p-4
-          "
+                mt-6 p-4
+                bg-success/5
+                rounded-xl border border-success/20
+              "
             >
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={20} className="text-success" />
+              <div
+                className="
+                  flex
+                  items-center gap-3
+                "
+              >
+                <CheckCircle2
+                  size={20}
+                  className="
+                    text-success
+                  "
+                />
 
                 <div>
                   <p
                     className="
-                  font-medium
-                  text-textPrimary
-                "
+                      font-medium text-textPrimary
+                    "
                   >
                     {fileName}
                   </p>
 
                   <p
                     className="
-                  text-sm
-                  text-textSecondary
-                "
+                      text-sm text-textSecondary
+                    "
                   >
                     File selected successfully
                   </p>
@@ -428,24 +437,20 @@ const UploadTeachersCard = ({
       )} */}
 
       {/* ACTION */}
-      <button
+      <Button
         disabled={!fileName || isUploading}
-        onClick={handleUpload}
+        handleClick={handleUpload}
         className="
-          mt-6
           w-full
-          rounded-xl
-          bg-primary
-          py-3
-          font-medium
-          text-white
-          transition-all
-          hover:bg-primaryDark
-          disabled:cursor-not-allowed
-          disabled:opacity-50
+          mt-6
         "
       >
-        <span className="flex justify-center items-center gap-3">
+        <span
+          className="
+            flex
+            justify-center items-center gap-3
+          "
+        >
           <Import size={18} />
           {isUploading ? (
             <>
@@ -455,18 +460,32 @@ const UploadTeachersCard = ({
             "Import Teachers"
           )}
         </span>
-      </button>
+      </Button>
 
       {/* PREVIEW */}
       {fileName && (
-        <div className="mt-6">
-          <div className="mb-3 flex items-center gap-2">
-            <FileSpreadsheet size={18} className="text-primary" />
+        <div
+          className="
+            mt-6
+          "
+        >
+          <div
+            className="
+              flex
+              mb-3
+              items-center gap-2
+            "
+          >
+            <FileSpreadsheet
+              size={18}
+              className="
+                text-primary
+              "
+            />
 
             <h3
               className="
-                font-semibold
-                text-textPrimary
+                font-semibold text-textPrimary
               "
             >
               Preview Data
@@ -476,30 +495,106 @@ const UploadTeachersCard = ({
           <div
             className="
               overflow-hidden
-              rounded-xl
-              border
-              border-border
+              rounded-xl border border-border
             "
           >
-            <table className="w-full">
+            <table
+              className="
+                w-full
+              "
+            >
               <thead>
-                <tr className="bg-background">
-                  <th className="p-3 text-left">Name</th>
-                  <th className="p-3 text-left">AssignedClass</th>
-                  <th className="p-3 text-left">Subjects</th>
-                  <th className="p-3 text-left">Mobile</th>
-                  <th className="p-3 text-left">Email</th>
+                <tr
+                  className="
+                    bg-background
+                  "
+                >
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Name
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    AssignedClass
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Subjects
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Mobile
+                  </th>
+                  <th
+                    className="
+                      p-3
+                      text-left
+                    "
+                  >
+                    Email
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 {teachers.map((teacher, index) => (
-                  <tr key={index} className="border-t border-border">
-                    <td className="p-3">{teacher.Name}</td>
-                    <td className="p-3">{teacher.AssignedClass ?? ""}</td>
-                    <td className="p-3">{teacher.Subjects}</td>
-                    <td className="p-3">{teacher.Mobile}</td>
-                    <td className="p-3">{teacher.Email ?? ""}</td>
+                  <tr
+                    key={index}
+                    className="
+                      border-t border-border
+                    "
+                  >
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {teacher.Name}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {teacher.AssignedClass ?? ""}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {teacher.Subjects}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {teacher.Mobile}
+                    </td>
+                    <td
+                      className="
+                        p-3
+                      "
+                    >
+                      {teacher.Email ?? ""}
+                    </td>
                   </tr>
                 ))}
               </tbody>

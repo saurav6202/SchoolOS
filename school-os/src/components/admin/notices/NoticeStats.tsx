@@ -1,6 +1,7 @@
 import { Bell, Megaphone, AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../../../api/api";
+import StatCard from "../../ui/StatCard";
 
 const NoticeStats = () => {
   const [statData, setStatData] = useState({
@@ -43,65 +44,14 @@ const NoticeStats = () => {
   return (
     <section
       className="
-        grid
-        gap-6
-        md:grid-cols-2
-        xl:grid-cols-4
+        grid grid-cols-2
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
       "
     >
       {stats.map((stat) => (
-        <div
-          key={stat.title}
-          className="
-            rounded-2xl
-            border
-            border-border
-            bg-surface
-            p-5
-            shadow-card
-            transition-all
-            duration-300
-            hover:shadow-lg
-          "
-        >
-          <div className="flex items-start justify-between">
-            <div>
-              <p
-                className="
-                  text-sm
-                  text-textSecondary
-                "
-              >
-                {stat.title}
-              </p>
-
-              <h2
-                className="
-                  mt-3
-                  text-4xl
-                  font-bold
-                  text-textPrimary
-                "
-              >
-                {stat.value}
-              </h2>
-            </div>
-
-            <div
-              className={`
-                flex
-                h-14
-                w-14
-                items-center
-                justify-center
-                rounded-2xl
-                ${stat.iconBg}
-              `}
-            >
-              <stat.icon size={26} className={stat.iconColor} />
-            </div>
-          </div>
-        </div>
+        <StatCard stat={stat} key={stat.title} />
       ))}
     </section>
   );

@@ -1,11 +1,11 @@
 import { GraduationCap, PlusCircle } from "lucide-react";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import Select from "react-select";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
 import { useEffect, useState } from "react";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 type Teacher = {
   _id: string;
@@ -163,9 +163,6 @@ const AddClassForm = ({
           <input
             type="number"
             placeholder="e.g. 8"
-            {...register("name", {
-              required: "Class Name is required",
-            })}
             className="
               w-full
               px-4 py-3
@@ -175,7 +172,14 @@ const AddClassForm = ({
             "
           />
           {errors.name && (
-            <p className="text-red-500 ml-2 text-sm">{errors.name?.message}</p>
+            <p
+              className="
+                ml-2
+                text-red-500 text-sm
+              "
+            >
+              {errors.name?.message}
+            </p>
           )}
         </div>
 
@@ -193,9 +197,6 @@ const AddClassForm = ({
           </label>
 
           <select
-            {...register("section", {
-              validate: (value) => value !== "" || "Please select a section",
-            })}
             className="
               w-full
               px-4 py-3
@@ -216,7 +217,12 @@ const AddClassForm = ({
           </select>
 
           {errors.section && (
-            <p className="text-red-500 ml-2 text-sm">
+            <p
+              className="
+                ml-2
+                text-red-500 text-sm
+              "
+            >
               {errors.section?.message}
             </p>
           )}
@@ -226,19 +232,16 @@ const AddClassForm = ({
         <div>
           <label
             className="
-      flex
-      mb-2
-      text-sm font-medium text-textPrimary
-      items-center gap-2
-    "
+              flex
+              mb-2
+              text-sm font-medium text-textPrimary
+              items-center gap-2
+            "
           >
             Academic Year
           </label>
 
           <select
-            {...register("academicYear", {
-              required: "Academic year is required",
-            })}
             className="
               w-full
               px-4 py-3
@@ -257,7 +260,12 @@ const AddClassForm = ({
           </select>
 
           {errors.academicYear && (
-            <p className="text-red-500 ml-2 text-sm">
+            <p
+              className="
+                ml-2
+                text-red-500 text-sm
+              "
+            >
               {errors.academicYear.message}
             </p>
           )}
@@ -340,10 +348,10 @@ const AddClassForm = ({
         <div>
           <label
             className="
-                block
-                mb-2
-                text-sm font-medium text-textPrimary
-              "
+              block
+              mb-2
+              text-sm font-medium text-textPrimary
+            "
           >
             Subjects
           </label>
@@ -401,12 +409,22 @@ const AddClassForm = ({
           />
 
           {errors.subjects && (
-            <p className="mt-2 ml-2 text-sm text-red-500">
+            <p
+              className="
+                mt-2 ml-2
+                text-sm text-red-500
+              "
+            >
               {errors.subjects.message}
             </p>
           )}
 
-          <p className="mt-2 text-xs text-textSecondary">
+          <p
+            className="
+              mt-2
+              text-xs text-textSecondary
+            "
+          >
             Select subjects taught in this class.
           </p>
         </div>

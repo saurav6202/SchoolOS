@@ -4,16 +4,11 @@ import AddStudentForm from "../../components/admin/students/AddStudentForm";
 import UploadStudentsCard from "../../components/admin/students/UploadStudentsCard";
 import { useEffect } from "react";
 import { useStudentsStore } from "../../store/students";
-import PageLoader from "../../components/common/PageLoader";
+import PageLoader from "../../components/ui/PageLoader";
 
 const Students = () => {
-  const {
-    totalClasses,
-    totalStudents,
-    refreshStudents,
-    loaded,
-    loading,
-  } = useStudentsStore();
+  const { totalClasses, totalStudents, refreshStudents, loaded, loading, } =
+    useStudentsStore();
 
   useEffect(() => {
     if (!loaded) {
@@ -26,7 +21,11 @@ const Students = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div
+      className="
+        space-y-6
+      "
+    >
       <StudentStats
         totalClasses={totalClasses!}
         totalStudents={totalStudents!}

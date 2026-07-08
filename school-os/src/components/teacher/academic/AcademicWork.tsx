@@ -1,9 +1,9 @@
 import { BookOpenCheck, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../../../api/api";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import { showError, showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 import { today } from "../../../utils/formatDate";
 
 type Subject = {
@@ -166,12 +166,11 @@ const AcademicWork = () => {
     return (
       <section
         className="
-          bg-surface
-          border border-border
-          rounded-2xl
-          shadow-card
-          p-6   
           flex
+          p-6
+          bg-surface
+          border border-border rounded-2xl
+          shadow-card
           items-center gap-3
         "
       >
@@ -183,226 +182,205 @@ const AcademicWork = () => {
   if (loading) showLoading();
 
   return (
-   <section
-  className="
-    overflow-hidden
-    rounded-2xl
-    border border-border
-    bg-surface
-    shadow-card
-  "
->
-  {/* Header */}
-  <div
-    className="
-      flex
-      items-center
-      gap-3
-      border-b border-border
-      px-6 py-5
-    "
-  >
-    <div
+    <section
       className="
-        flex
-        h-12 w-12
-        items-center justify-center
-        rounded-xl
-        bg-primaryLight
-      "
-    >
-      <BookOpenCheck
-        size={22}
-        className="text-primary"
-      />
-    </div>
-
-    <div>
-      <h2
-        className="
-          text-lg
-          font-semibold
-          text-textPrimary
-        "
-      >
-        Academic Work Submission
-      </h2>
-
-      <p
-        className="
-          text-sm
-          text-textSecondary
-        "
-      >
-        Class {classInfo?.name}
-        {classInfo?.section} • {today}
-      </p>
-    </div>
-  </div>
-
-  <div className="p-6">
-    {/* Table */}
-    <div
-      className="
-        overflow-hidden
-        rounded-2xl
-        border border-border
-      "
+       overflow-hidden
+       bg-surface
+       rounded-2xl border border-border
+       shadow-card
+     "
     >
       {/* Header */}
       <div
         className="
-          grid
-          grid-cols-[180px_1fr_1fr]
-          border-b border-border
-          bg-background
-        "
+      flex
+      px-6 py-5
+      border-b border-border
+      items-center gap-3
+    "
       >
         <div
           className="
-            p-4
-            font-semibold
-            text-textPrimary
-            border-r border-border
-          "
+        flex
+        h-12 w-12
+        bg-primaryLight
+        rounded-xl
+        items-center justify-center
+      "
         >
-          Subject
+          <BookOpenCheck
+            size={22}
+            className="
+          text-primary
+        "
+          />
         </div>
 
-        <div
-          className="
-            p-4
-            font-semibold
-            text-textPrimary
-            border-r border-border
-          "
-        >
-          Classwork
-        </div>
+        <div>
+          <h2
+            className="
+          text-lg font-semibold text-textPrimary
+        "
+          >
+            Academic Work Submission
+          </h2>
 
-        <div
-          className="
-            p-4
-            font-semibold
-            text-textPrimary
-          "
-        >
-          Homework
+          <p
+            className="
+          text-sm text-textSecondary
+        "
+          >
+            Class {classInfo?.name}
+            {classInfo?.section} • {today}
+          </p>
         </div>
       </div>
 
-      {/* Rows */}
-      {rows.map((row) => (
+      <div
+        className="
+      p-6
+    "
+      >
+        {/* Table */}
         <div
-          key={row.subjectId}
           className="
-            grid
-            grid-cols-[180px_1fr_1fr]
+        overflow-hidden
+        rounded-2xl border border-border
+      "
+        >
+          {/* Header */}
+          <div
+            className="
+          grid grid-cols-[180px_1fr_1fr]
+          bg-background
+          border-b border-border
+        "
+          >
+            <div
+              className="
+            p-4
+            font-semibold text-textPrimary
+            border-r border-border
+          "
+            >
+              Subject
+            </div>
+
+            <div
+              className="
+            p-4
+            font-semibold text-textPrimary
+            border-r border-border
+          "
+            >
+              Classwork
+            </div>
+
+            <div
+              className="
+            p-4
+            font-semibold text-textPrimary
+          "
+            >
+              Homework
+            </div>
+          </div>
+
+          {/* Rows */}
+          {rows.map((row) => (
+            <div
+              key={row.subjectId}
+              className="
+            grid grid-cols-[180px_1fr_1fr]
             border-b border-border
             last:border-b-0
           "
-        >
-          <div
-            className="
+            >
+              <div
+                className="
               p-4
-              font-medium
-              text-textPrimary
+              font-medium text-textPrimary
               border-r border-border
             "
-          >
-            {row.subjectName}
-          </div>
+              >
+                {row.subjectName}
+              </div>
 
-          <div
-            className="
+              <div
+                className="
               p-2
               border-r border-border
             "
-          >
-            <textarea
-              rows={2}
-              value={row.classwork}
-              onChange={(e) =>
-                updateRow(
-                  row.subjectId,
-                  "classwork",
-                  e.target.value
-                )
-              }
-              placeholder={`Today's ${row.subjectName} classwork`}
-              className="
+              >
+                <textarea
+                  rows={2}
+                  value={row.classwork}
+                  onChange={(e) =>
+                    updateRow(row.subjectId, "classwork", e.target.value)
+                  }
+                  placeholder={`Today's ${row.subjectName} classwork`}
+                  className="
                 w-full
-                resize-none
-                rounded-lg
-                border border-transparent
-                bg-transparent
                 px-3 py-2
-                outline-none
-                transition-all
-                focus:border-primary
-                focus:bg-background
+                bg-transparent
+                rounded-lg border border-transparent
+                resize-none transition-all
+                outline-none focus:border-primary focus:bg-background
               "
-            />
-          </div>
+                />
+              </div>
 
-          <div className="p-2">
-            <textarea
-              rows={2}
-              value={row.homework}
-              onChange={(e) =>
-                updateRow(
-                  row.subjectId,
-                  "homework",
-                  e.target.value
-                )
-              }
-              placeholder={`${row.subjectName} homework`}
-              className="
+              <div
+                className="
+              p-2
+            "
+              >
+                <textarea
+                  rows={2}
+                  value={row.homework}
+                  onChange={(e) =>
+                    updateRow(row.subjectId, "homework", e.target.value)
+                  }
+                  placeholder={`${row.subjectName} homework`}
+                  className="
                 w-full
-                resize-none
-                rounded-lg
-                border border-transparent
-                bg-transparent
                 px-3 py-2
-                outline-none
-                transition-all
-                focus:border-primary
-                focus:bg-background
+                bg-transparent
+                rounded-lg border border-transparent
+                resize-none transition-all
+                outline-none focus:border-primary focus:bg-background
               "
-            />
-          </div>
+                />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
 
-    {/* Submit */}
-    <div
-      className="
-        mt-6
+        {/* Submit */}
+        <div
+          className="
         flex
+        mt-6
         justify-end
       "
-    >
-      <Button
-        handleClick={handleSubmit}
-        disabled={submitting}
-      >
-        <Send size={18} />
+        >
+          <Button handleClick={handleSubmit} disabled={submitting}>
+            <Send size={18} />
 
-        {submitting ? (
-          <>
-            Saving...
-            <Loader />
-          </>
-        ) : isEditMode ? (
-          "Update Academic Work"
-        ) : (
-          "Submit Academic Work"
-        )}
-      </Button>
-    </div>
-  </div>
-</section>
+            {submitting ? (
+              <>
+                Saving...
+                <Loader />
+              </>
+            ) : isEditMode ? (
+              "Update Academic Work"
+            ) : (
+              "Submit Academic Work"
+            )}
+          </Button>
+        </div>
+      </div>
+    </section>
   );
 };
 

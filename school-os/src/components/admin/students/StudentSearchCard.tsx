@@ -4,9 +4,12 @@ import {
   type ChangeEventHandler,
   type SubmitEventHandler,
 } from "react";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import api from "../../../api/api";
 import { showWarning } from "../../../utils/toast";
+import Loader from "../../ui/Loader";
+import { inputClass } from "../../../styles/forms";
+
 
 const StudentSearchCard = () => {
   const [name, setName] = useState("");
@@ -17,9 +20,8 @@ const StudentSearchCard = () => {
   const [isClassRequired, setIsClassRequired] = useState(false);
   const [formData, setFormData] = useState("");
   const [students, setStudents] = useState<Array<Student>>([]);
-  const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [noStudnet, setNoStudent] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   type Student = {
     name: string;
@@ -45,19 +47,18 @@ const StudentSearchCard = () => {
 
     try {
       setLoading(true);
+      setHasSearched(true);
+      console.log("hasSearched: ", hasSearched);
       const res = await api.post("/api/students/search", data);
       if (res.data.data) {
         if (res.data.data.length > 0) {
           setStudents(res.data.data);
-          setShowResults(true);
         } else {
           showWarning("No student found!");
           // setNoStudent(true);
         }
       } else {
-        setShowResults(false);
         setStudents([]);
-        setFormData("No data found");
       }
       setClassName("");
       setSection("");
@@ -88,14 +89,16 @@ const StudentSearchCard = () => {
   return (
     <section
       className="
-        p-6
+        p-4
         bg-surface
         rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* Header */}
-      <div
+     <div
         className="
           flex
           items-center gap-3
@@ -141,7 +144,8 @@ const StudentSearchCard = () => {
       <form onSubmit={handleSearch}>
         <div
           className="
-            mt-6 space-y-4
+            mt-5 space-y-4
+            sm:mt-6
           "
         >
           <input
@@ -150,13 +154,7 @@ const StudentSearchCard = () => {
             onChange={(e) => setName(e.target.value)}
             disabled
             placeholder="Student Name"
-            className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              transition-all
-              outline-none focus:border-primary
-            "
+          className={`${inputClass} bg-slate-400/10`}
           />
 
           <div
@@ -171,11 +169,7 @@ const StudentSearchCard = () => {
               onChange={handleClassChange}
               required={isClassRequired}
               placeholder="Class"
-              className="
-                px-4 py-3
-                rounded-xl border border-border
-                outline-none focus:border-primary
-              "
+             className={inputClass}
             />
 
             <input
@@ -184,11 +178,7 @@ const StudentSearchCard = () => {
               onChange={handleSectionChange}
               required={isSectionRequired}
               placeholder="Section"
-              className="
-                px-4 py-3
-                rounded-xl border border-border
-                outline-none focus:border-primary
-              "
+             className={inputClass}
             />
           </div>
 
@@ -197,126 +187,138 @@ const StudentSearchCard = () => {
             value={admissionNo}
             onChange={handleAdmissionChange}
             placeholder="Admission Number"
-            className="
-              w-full
-              px-4 py-3
-              rounded-xl border border-border
-              outline-none focus:border-primary
-            "
+            className={inputClass}
           />
           {formData && (
             <p
               className="
-                ml-2
-                text-red-500 text-sm
+                ml-1
+                text-xs text-red-500
+                sm:text-sm
               "
             >
               {formData}
             </p>
           )}
           <Button
+            disabled={loading}
             className="
               w-full
             "
           >
-            Find Student
+            {loading ? <Loader /> : "Find Students"}
           </Button>
         </div>
       </form>
 
-      {loading && (
-        <p className="mt-5 text-center text-textSecondary">
+      {/* {loading && (
+        <div
+          className="
+            flex
+            mt-6
+            text-sm text-textSecondary
+            items-center justify-center gap-3
+          "
+        >
           <div
             className="
-            h-5
-            w-5
-            rounded-full
-            border-2
-            border-white
-            border-t-transparent
-            animate-spin
-          "
+              h-5 w-5
+              rounded-full border-2 border-primary border-t-transparent
+              animate-spin
+            "
           />
-          Loading...
-        </p>
-      )}
+
+          <span>Loading...</span>
+        </div>
+      )} */}
 
       {/* Result */}
       <div>
-        {showResults &&
-          students.map((student) => (
-            <div
-              className="
-              mt-6 p-4
-              bg-background
-              rounded-xl border border-border
-              cursor-pointer
-              transition-all
-              duration-300
-              hover:border-primary/40
-             hover:bg-primaryLight/20
-            "
-            >
+        {students.length > 0
+          ? students?.map((student) => (
               <div
                 className="
-                flex
-                items-center gap-3
-              "
+                  mt-6 p-4
+                  bg-background
+                  rounded-xl border border-border
+                  cursor-pointer transition-all
+                  duration-300 hover:border-primary/40 hover:bg-primaryLight/20
+                "
               >
                 <div
                   className="
-                  flex
-                  h-10 w-10
-                  bg-primaryLight
-                  rounded-full
-                  items-center justify-center
-                "
-                >
-                  <User
-                    size={18}
-                    className="
-                    text-primary
+                    flex
+                    items-center gap-3
                   "
-                  />
+                >
+                  <div
+                    className="
+                      flex
+                      h-10 w-10
+                      bg-primaryLight
+                      rounded-full
+                      shrink-0 items-center justify-center
+                    "
+                  >
+                    <User
+                      size={18}
+                      className="
+                        text-primary
+                      "
+                    />
+                  </div>
+
+                  <div>
+                    <h3
+                      className="
+                        font-semibold text-textPrimary text-sm
+                        sm:text-base
+                      "
+                    >
+                      {student?.name}
+                    </h3>
+
+                    <p
+                      className="
+                        text-sm text-textSecondary
+                      "
+                    >
+                      Class {student?.classId.name}
+                      {student?.classId.section}
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <h3
-                    className="
-                    font-semibold text-textPrimary
+                <div
+                  className="
+                    mt-4
+                    text-xs text-textSecondary
+                    sm:text-sm
                   "
-                  >
-                    {student.name}
-                  </h3>
-
-                  <p
+                >
+                  Admission No:{" "}
+                  <span
                     className="
-                    text-sm text-textSecondary
-                  "
+                      font-medium text-textPrimary
+                    "
                   >
-                    Class {student.classId.name}
-                    {student.classId.section}
-                  </p>
+                    {student?.admissionNo}
+                  </span>
                 </div>
               </div>
-
+            ))
+          : hasSearched && (
               <div
                 className="
-                mt-4
-                text-sm text-textSecondary
-              "
-              >
-                Admission No:{" "}
-                <span
-                  className="
-                  font-medium text-textPrimary
+                  flex
+                  mt-6
+                  text-sm text-textSecondary
+                  items-center justify-center
                 "
-                >
-                  {student.admissionNo}
-                </span>
+              >
+                <span>No student found. Try a different search.</span>
               </div>
-            </div>
-          ))}
+            )}
       </div>
     </section>
   );

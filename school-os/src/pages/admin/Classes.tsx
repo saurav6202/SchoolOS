@@ -4,7 +4,7 @@ import ClassStats from "../../components/admin/classes/ClassStats";
 import ClassList from "../../components/admin/classes/ClassList";
 import { useClassStore } from "../../store/classStore";
 import { useTeachersStore } from "../../store/teachersStore";
-import PageLoader from "../../components/common/PageLoader";
+import PageLoader from "../../components/ui/PageLoader";
 
 const Classes = () => {
   const {
@@ -28,7 +28,7 @@ const Classes = () => {
     }
   }, [loaded, refreshClasses]);
 
-   if (loading) {
+  if (loading) {
     return <PageLoader />;
   }
 

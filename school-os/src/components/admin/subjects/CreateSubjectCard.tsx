@@ -3,7 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
 import { useState } from "react";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 type FormData = {
   name: string;
@@ -49,36 +49,40 @@ const CreateSubjectCard = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
-        bg-surface
         p-6
+        bg-surface
+        rounded-2xl border border-border
         shadow-card
       "
     >
       {/* HEADER */}
-      <div className="flex items-center gap-3">
+      <div
+        className="
+          flex
+          items-center gap-3
+        "
+      >
         <div
           className="
             flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-xl
+            h-12 w-12
             bg-primaryLight
+            rounded-xl
+            items-center justify-center
           "
         >
-          <BookPlus size={22} className="text-primary" />
+          <BookPlus
+            size={22}
+            className="
+              text-primary
+            "
+          />
         </div>
 
         <div>
           <h2
             className="
-              text-lg
-              font-semibold
-              text-textPrimary
+              text-lg font-semibold text-textPrimary
             "
           >
             Create Subject
@@ -86,8 +90,7 @@ const CreateSubjectCard = ({
 
           <p
             className="
-              text-sm
-              text-textSecondary
+              text-sm text-textSecondary
             "
           >
             Add a new subject to the school
@@ -96,16 +99,19 @@ const CreateSubjectCard = ({
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="
+          mt-6 space-y-5
+        "
+      >
         {/* SUBJECT NAME */}
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Subject Name
@@ -114,24 +120,24 @@ const CreateSubjectCard = ({
           <input
             type="text"
             placeholder="Mathematics"
-            {...register("name", {
-              required: "Subject name is required",
-            })}
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
+              px-4 py-3
+              rounded-xl border border-border
               transition-all
-              focus:border-primary
+              outline-none focus:border-primary
             "
           />
 
           {errors.name && (
-            <p className="mt-1 text-sm text-error">{errors.name.message}</p>
+            <p
+              className="
+                mt-1
+                text-sm text-error
+              "
+            >
+              {errors.name.message}
+            </p>
           )}
         </div>
 
@@ -139,11 +145,9 @@ const CreateSubjectCard = ({
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-2
+              text-sm font-medium text-textPrimary
             "
           >
             Subject Code
@@ -152,26 +156,24 @@ const CreateSubjectCard = ({
           <input
             type="text"
             placeholder="MATH"
-            {...register("code", {
-              required: "Subject code is required",
-              onChange: (e) => (e.target.value = e.target.value.toUpperCase()),
-            })}
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              uppercase
-              outline-none
+              px-4 py-3
+              rounded-xl border border-border
               transition-all
-              focus:border-primary
+              uppercase outline-none focus:border-primary
             "
           />
 
           {errors.code && (
-            <p className="mt-1 text-sm text-error">{errors.code.message}</p>
+            <p
+              className="
+                mt-1
+                text-sm text-error
+              "
+            >
+              {errors.code.message}
+            </p>
           )}
         </div>
 
@@ -179,26 +181,26 @@ const CreateSubjectCard = ({
         <div>
           <label
             className="
-              mb-3
               block
-              text-sm
-              font-medium
-              text-textPrimary
+              mb-3
+              text-sm font-medium text-textPrimary
             "
           >
             Category
           </label>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div
+            className="
+              grid grid-cols-2
+              gap-3
+            "
+          >
             <label
               className={`
-                cursor-pointer
-                rounded-xl
-                border
                 p-4
                 text-center
-                transition-all
-
+                rounded-xl border
+                cursor-pointer transition-all
                 ${
                   selectedCategory === "core"
                     ? "border-primary bg-primaryLight"
@@ -209,17 +211,23 @@ const CreateSubjectCard = ({
               <input
                 type="radio"
                 value="core"
-                className="hidden"
-                {...register("category")}
+                className="
+                  hidden
+                "
               />
 
-              <p className="font-medium">Core</p>
+              <p
+                className="
+                  font-medium
+                "
+              >
+                Core
+              </p>
 
               <p
                 className="
                   mt-1
-                  text-xs
-                  text-textSecondary
+                  text-xs text-textSecondary
                 "
               >
                 Mandatory subject
@@ -228,13 +236,10 @@ const CreateSubjectCard = ({
 
             <label
               className={`
-                cursor-pointer
-                rounded-xl
-                border
                 p-4
                 text-center
-                transition-all
-
+                rounded-xl border
+                cursor-pointer transition-all
                 ${
                   selectedCategory === "optional"
                     ? "border-primary bg-primaryLight"
@@ -245,17 +250,23 @@ const CreateSubjectCard = ({
               <input
                 type="radio"
                 value="optional"
-                className="hidden"
-                {...register("category")}
+                className="
+                  hidden
+                "
               />
 
-              <p className="font-medium">Optional</p>
+              <p
+                className="
+                  font-medium
+                "
+              >
+                Optional
+              </p>
 
               <p
                 className="
                   mt-1
-                  text-xs
-                  text-textSecondary
+                  text-xs text-textSecondary
                 "
               >
                 Elective subject
@@ -270,14 +281,12 @@ const CreateSubjectCard = ({
           disabled={submitting}
           className="
             w-full
-            rounded-xl
-            bg-primary
             py-3
-            font-medium
-            text-white
+            font-medium text-white
+            bg-primary
+            rounded-xl
             transition-all
-            hover:bg-primaryDark
-            disabled:opacity-60
+            hover:bg-primaryDark disabled:opacity-60
           "
         >
           {submitting ? (

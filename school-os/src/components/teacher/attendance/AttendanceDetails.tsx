@@ -3,12 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import api from "../../../api/api";
-import Button from "../../../components/common/Button";
+import Button from "../../ui/Button";
 import { showError, showSuccess } from "../../../utils/toast";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 import { useTeacherStore } from "../../../store/teacher/teacherStore";
 import { useAttendanceStore } from "../../../store/teacher/attendanceStore";
-
 
 const AttendanceDetails = () => {
   const { refreshTeacher, loaded, loading } = useTeacherStore();
@@ -92,12 +91,11 @@ const AttendanceDetails = () => {
     return (
       <section
         className="
-          bg-surface
-          border border-border
-          rounded-2xl
-          shadow-card
-          p-6   
           flex
+          p-6
+          bg-surface
+          border border-border rounded-2xl
+          shadow-card
           items-center gap-3
         "
       >
@@ -109,40 +107,70 @@ const AttendanceDetails = () => {
   if (loading) showLoading();
 
   if (!attendanceDetails) {
-    return <div className="py-20 text-center">Attendance not found.</div>;
+    return (
+      <div
+        className="
+        py-20
+        text-center
+      "
+      >
+        Attendance not found.
+      </div>
+    );
   }
 
   return (
-    <section className="space-y-6">
+    <section
+      className="
+        space-y-6
+      "
+    >
       {/* Header */}
       <div
         className="
-          rounded-2xl
-          border border-border
-          bg-surface
           p-6
+          bg-surface
+          rounded-2xl border border-border
           shadow-card
         "
       >
-        <div className="flex items-center gap-4">
+        <div
+          className="
+            flex
+            items-center gap-4
+          "
+        >
           <div
             className="
               flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-xl
+              h-14 w-14
               bg-primaryLight
+              rounded-xl
+              items-center justify-center
             "
           >
-            <CalendarCheck size={24} className="text-primary" />
+            <CalendarCheck
+              size={24}
+              className="
+                text-primary
+              "
+            />
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold">Attendance Details</h1>
+            <h1
+              className="
+                text-2xl font-bold
+              "
+            >
+              Attendance Details
+            </h1>
 
-            <p className="text-textSecondary">
+            <p
+              className="
+                text-textSecondary
+              "
+            >
               Class {attendanceDetails.classId.name}
               {attendanceDetails.classId.section}
             </p>
@@ -151,75 +179,121 @@ const AttendanceDetails = () => {
 
         <div
           className="
-            mt-5
             inline-flex
-            rounded-full
+            mt-5 px-4 py-2
+            text-sm font-medium text-primary
             bg-primaryLight
-            px-4
-            py-2
-            text-sm
-            font-medium
-            text-primary
+            rounded-full
           "
         >
-         {attendanceDetails.date}
+          {attendanceDetails.date}
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div
+        className="
+          grid
+          gap-4
+          md:grid-cols-4
+        "
+      >
         <div
           className="
-            rounded-2xl
-            border border-border
-            bg-surface
             p-5
+            bg-surface
+            rounded-2xl border border-border
           "
         >
-          <p className="text-sm text-textSecondary">Total Students</p>
+          <p
+            className="
+              text-sm text-textSecondary
+            "
+          >
+            Total Students
+          </p>
 
-          <h3 className="mt-2 text-3xl font-bold">{totalStudents}</h3>
+          <h3
+            className="
+              mt-2
+              text-3xl font-bold
+            "
+          >
+            {totalStudents}
+          </h3>
         </div>
 
         <div
           className="
-            rounded-2xl
-            border border-border
-            bg-success/10
             p-5
+            bg-success/10
+            rounded-2xl border border-border
           "
         >
-          <p className="text-sm text-textSecondary">Present</p>
+          <p
+            className="
+              text-sm text-textSecondary
+            "
+          >
+            Present
+          </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-success">
+          <h3
+            className="
+              mt-2
+              text-3xl font-bold text-success
+            "
+          >
             {presentCount}
           </h3>
         </div>
 
         <div
           className="
-            rounded-2xl
-            border border-border
-            bg-error/10
             p-5
+            bg-error/10
+            rounded-2xl border border-border
           "
         >
-          <p className="text-sm text-textSecondary">Absent</p>
+          <p
+            className="
+              text-sm text-textSecondary
+            "
+          >
+            Absent
+          </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-error">{absentCount}</h3>
+          <h3
+            className="
+              mt-2
+              text-3xl font-bold text-error
+            "
+          >
+            {absentCount}
+          </h3>
         </div>
 
         <div
           className="
-            rounded-2xl
-            border border-border
-            bg-primaryLight
             p-5
+            bg-primaryLight
+            rounded-2xl border border-border
           "
         >
-          <p className="text-sm text-textSecondary">Attendance Rate</p>
+          <p
+            className="
+              text-sm text-textSecondary
+            "
+          >
+            Attendance Rate
+          </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-primary">
+          <h3
+            className="
+              mt-2
+              text-3xl font-bold text-primary
+            "
+          >
             {attendanceRate}%
           </h3>
         </div>
@@ -229,65 +303,101 @@ const AttendanceDetails = () => {
       <div
         className="
           overflow-hidden
-          rounded-2xl
-          border border-border
           bg-surface
+          rounded-2xl border border-border
           shadow-card
         "
       >
         <div
           className="
             flex
-            items-center
-            gap-3
+            px-6 py-5
             border-b border-border
-            px-6
-            py-5
+            items-center gap-3
           "
         >
-          <Users size={20} className="text-primary" />
+          <Users
+            size={20}
+            className="
+              text-primary
+            "
+          />
 
-          <h2 className="font-semibold">Student Attendance</h2>
+          <h2
+            className="
+              font-semibold
+            "
+          >
+            Student Attendance
+          </h2>
         </div>
 
         <div
           className="
-            grid
-            grid-cols-[120px_1fr_150px]
-            border-b border-border
-            bg-background
+            grid grid-cols-[120px_1fr_150px]
             font-semibold
+            bg-background
+            border-b border-border
           "
         >
-          <div className="p-4">Roll No.</div>
+          <div
+            className="
+              p-4
+            "
+          >
+            Roll No.
+          </div>
 
-          <div className="p-4">Student Name</div>
+          <div
+            className="
+              p-4
+            "
+          >
+            Student Name
+          </div>
 
-          <div className="p-4 text-center">Present</div>
+          <div
+            className="
+              p-4
+              text-center
+            "
+          >
+            Present
+          </div>
         </div>
 
         {attendanceDetails.records.map((record) => (
           <div
             key={record.studentId._id}
             className="
-              grid
-              grid-cols-[120px_1fr_150px]
+              grid grid-cols-[120px_1fr_150px]
               border-b border-border
               last:border-b-0
             "
           >
-            <div className="p-4 text-textSecondary">
+            <div
+              className="
+                p-4
+                text-textSecondary
+              "
+            >
               {record.studentId.rollNumber}
             </div>
 
-            <div className="p-4 font-medium">{record.studentId.name}</div>
+            <div
+              className="
+                p-4
+                font-medium
+              "
+            >
+              {record.studentId.name}
+            </div>
 
             <div
               className="
                 flex
-                items-center
-                justify-center
                 p-4
+                items-center justify-center
               "
             >
               <input
@@ -295,8 +405,7 @@ const AttendanceDetails = () => {
                 checked={record.isPresent}
                 onChange={() => toggleAttendance(record.studentId._id)}
                 className="
-                  h-5
-                  w-5
+                  h-5 w-5
                   cursor-pointer
                 "
               />
@@ -308,44 +417,54 @@ const AttendanceDetails = () => {
       {/* Summary */}
       <div
         className="
-          flex
-          flex-wrap
+          flex flex-wrap
           gap-3
         "
       >
         <div
           className="
             flex
-            items-center
-            gap-2
-            rounded-lg
+            px-4 py-2
             bg-success/10
-            px-4
-            py-2
+            rounded-lg
+            items-center gap-2
           "
         >
-          <CheckCircle size={18} className="text-success" />
+          <CheckCircle
+            size={18}
+            className="
+              text-success
+            "
+          />
           Present: {presentCount}
         </div>
 
         <div
           className="
             flex
-            items-center
-            gap-2
-            rounded-lg
+            px-4 py-2
             bg-error/10
-            px-4
-            py-2
+            rounded-lg
+            items-center gap-2
           "
         >
-          <XCircle size={18} className="text-error" />
+          <XCircle
+            size={18}
+            className="
+              text-error
+            "
+          />
           Absent: {absentCount}
         </div>
       </div>
 
       {/* Save */}
-      <div className="flex justify-end">
+      <div
+        className="
+          flex
+          justify-end
+        "
+      >
         <Button handleClick={handleUpdate}>
           <Save size={18} />
           {submitting ? (

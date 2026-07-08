@@ -51,33 +51,26 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
         bg-surface
+        rounded-2xl border border-border
         shadow-card
       "
     >
       {/* HEADER */}
       <div
         className="
-          flex
-          flex-col
+          flex flex-col
+          p-4
+          border-b border-border
           gap-4
-          border-b
-          border-border
-          p-6
-          lg:flex-row
-          lg:items-center
-          lg:justify-between
+          sm:flex-row sm:p-5 sm:items-center sm:justify-between
+          lg:p-6
         "
       >
         <div>
           <h2
             className="
-              text-lg
-              font-semibold
-              text-textPrimary
+              text-lg font-semibold text-textPrimary
             "
           >
             Teachers
@@ -86,23 +79,25 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
           <p
             className="
               mt-1
-              text-sm
-              text-textSecondary
+              text-sm text-textSecondary
             "
           >
             Manage all teachers
           </p>
         </div>
 
-        <div className="relative w-full lg:w-80">
+        <div
+          className="
+            w-full
+            relative
+            sm:max-w-xs
+          "
+        >
           <Search
             size={18}
             className="
-              absolute
-              left-3
-              top-1/2
-              -translate-y-1/2
               text-textSecondary
+              absolute left-3 top-1/2 -translate-y-1/2
             "
           />
 
@@ -113,51 +108,86 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
             onChange={(e) => setSearch(e.target.value)}
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              py-3
-              pl-10
-              pr-4
-              outline-none
-              focus:border-primary
+              py-3 pl-10 pr-4
+              text-sm
+              rounded-xl border border-border
+              transition-colors
+              outline-none focus:border-primary
+              sm:text-base
             "
           />
         </div>
       </div>
 
       {/* TABLE */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div
+        className="
+          overflow-x-auto
+        "
+      >
+        <table
+          className="
+            w-full
+          "
+        >
           <thead>
             <tr
               className="
-                border-b
-                border-border
                 bg-background
+                border-b border-border
               "
             >
-              <th className="px-6 py-4 text-left text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-left text-sm font-semibold
+                "
+              >
                 Teacher
               </th>
 
-              <th className="px-6 py-4 text-left text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-left text-sm font-semibold
+                "
+              >
                 Employee ID
               </th>
 
-              <th className="px-6 py-4 text-left text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-left text-sm font-semibold
+                "
+              >
                 Subjects
               </th>
 
-              <th className="px-6 py-4 text-left text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-left text-sm font-semibold
+                "
+              >
                 Class
               </th>
 
-              <th className="px-6 py-4 text-left text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-left text-sm font-semibold
+                "
+              >
                 Email
               </th>
 
-              <th className="px-6 py-4 text-center text-sm font-semibold">
+              <th
+                className="
+                  px-6 py-4
+                  text-center text-sm font-semibold
+                "
+              >
                 Actions
               </th>
             </tr>
@@ -169,77 +199,132 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
                 <tr
                   key={teacher._id}
                   className="
-                      border-b
-                      border-border
-                      hover:bg-background
-                    "
+                    border-b border-border
+                    hover:bg-background
+                  "
                 >
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        items-center gap-3
+                      "
+                    >
                       <div
                         className="
-                            flex
-                            h-10
-                            w-10
-                            items-center
-                            justify-center
-                            rounded-lg
-                            bg-primaryLight
-                          "
+                          flex
+                          h-10 w-10
+                          bg-primaryLight
+                          rounded-lg
+                          items-center justify-center
+                        "
                       >
                         {teacher.assignedClass.className ? (
-                          <UserStar size={18} className="text-primary" />
+                          <UserStar
+                            size={18}
+                            className="
+                              text-primary
+                            "
+                          />
                         ) : (
-                          <User size={18} className="text-primary" />
+                          <User
+                            size={18}
+                            className="
+                              text-primary
+                            "
+                          />
                         )}
                       </div>
 
-                      <span className="font-medium">{teacher.name}</span>
+                      <span
+                        className="
+                          font-medium
+                        "
+                      >
+                        {teacher.name}
+                      </span>
                     </div>
                   </td>
 
-                  <td className="px-6 py-4">{teacher.teacherId}</td>
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
+                    {teacher.teacherId}
+                  </td>
 
-                  <td className="px-6 py-4">{teacher.subjects.join(", ")}</td>
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
+                    {teacher.subjects.join(", ")}
+                  </td>
 
-                  <td className="px-6 py-4">
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
                     {teacher.assignedClass.className ? (
                       <span
                         className="
-                          rounded-full
+                          px-3 py-1
+                          text-xs font-medium text-success
                           bg-success/10
-                          px-3
-                          py-1
-                          text-xs
-                          font-medium
-                          text-success
+                          rounded-full
                         "
                       >
                         {teacher.assignedClass.className}
                         {teacher.assignedClass.section}
                       </span>
                     ) : (
-                      <p className="text-sm text-textSecondary"></p>
+                      <p
+                        className="
+                          text-sm text-textSecondary
+                        "
+                      ></p>
                     )}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2">
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        items-center gap-2
+                      "
+                    >
                       <Mail size={14} />
                       {teacher.email}
                     </div>
                   </td>
 
-                  <td className="px-6 py-4">
-                    <div className="flex justify-center gap-2">
+                  <td
+                    className="
+                      px-6 py-4
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        justify-center gap-2
+                      "
+                    >
                       <button
                         onClick={() => handleEdit(teacher._id)}
                         className="
-                            rounded-lg
-                            border
-                            border-border
-                            p-2
-                            hover:border-primary
-                          "
+                          p-2
+                          rounded-lg border border-border
+                          hover:border-primary
+                        "
                       >
                         <Pencil size={16} />
                       </button>
@@ -247,13 +332,11 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
                       <button
                         onClick={() => handleDelete(teacher._id)}
                         className="
-                            rounded-lg
-                            border
-                            border-error/30
-                            p-2
-                            text-error
-                            hover:bg-error/10
-                          "
+                          p-2
+                          text-error
+                          rounded-lg border border-error/30
+                          hover:bg-error/10
+                        "
                       >
                         <Trash2 size={16} />
                       </button>
@@ -266,8 +349,7 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
                 <td
                   colSpan={6}
                   className="
-                    px-6
-                    py-16
+                    px-6 py-16
                     text-center
                   "
                 >
@@ -291,8 +373,7 @@ const TeacherList = ({ teachers }: { teachers: Array<Teacher> }) => {
                   <p
                     className="
                       mt-2
-                      text-sm
-                      text-textSecondary
+                      text-sm text-textSecondary
                     "
                   >
                     Try a different search.

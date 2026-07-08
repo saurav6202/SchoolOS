@@ -3,7 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import api from "../../../api/api";
 import { showError, showSuccess } from "../../../utils/toast";
 import { useState } from "react";
-import Loader from "../../common/Loader";
+import Loader from "../../ui/Loader";
 
 type FormData = {
   name: string;
@@ -61,52 +61,71 @@ const CreateSessionCard = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
-        bg-surface
         p-6
+        bg-surface
+        rounded-2xl border border-border
         shadow-card
       "
     >
       {/* HEADER */}
-      <div className="flex items-center gap-3">
+      <div
+        className="
+          flex
+          items-center gap-3
+        "
+      >
         <div
           className="
             flex
-            h-12
-            w-12
-            items-center
-            justify-center
-            rounded-xl
+            h-12 w-12
             bg-primary/10
+            rounded-xl
+            items-center justify-center
           "
         >
-          <CalendarPlus size={22} className="text-primary" />
+          <CalendarPlus
+            size={22}
+            className="
+              text-primary
+            "
+          />
         </div>
 
         <div>
-          <h2 className="text-lg font-semibold">Create Session</h2>
+          <h2
+            className="
+              text-lg font-semibold
+            "
+          >
+            Create Session
+          </h2>
 
-          <p className="text-sm text-textSecondary">
+          <p
+            className="
+              text-sm text-textSecondary
+            "
+          >
             Create a new academic year
           </p>
         </div>
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSubmit(submitFnc)} className="mt-6 space-y-4">
+      <form
+        onSubmit={handleSubmit(submitFnc)}
+        className="
+          mt-6 space-y-4
+        "
+      >
         {/* SESSION NAME */}
 
         <div>
           <label
             className="
-                mb-2
-                block
-                text-sm
-                font-medium
-                text-textSecondary
-                "
+              block
+              mb-2
+              text-sm font-medium text-textSecondary
+            "
           >
             Session Name
           </label>
@@ -114,19 +133,15 @@ const CreateSessionCard = ({
           <input
             type="text"
             readOnly
-            {...register("name")}
             className="
-                w-full
-                rounded-xl
-                border
-                border-border
-                bg-background
-                px-4
-                py-3
-                text-textPrimary
-                outline-none
-                cursor-not-allowed
-                "
+              w-full
+              px-4 py-3
+              text-textPrimary
+              bg-background
+              rounded-xl border border-border
+              cursor-not-allowed
+              outline-none
+            "
           />
         </div>
 
@@ -134,11 +149,9 @@ const CreateSessionCard = ({
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textSecondary
+              mb-2
+              text-sm font-medium text-textSecondary
             "
           >
             Start Date
@@ -146,24 +159,21 @@ const CreateSessionCard = ({
 
           <input
             type="date"
-            {...register("startDate", {
-              required: "Please select start date",
-              onChange: (e) => generateSessionName(e.target.value),
-            })}
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              focus:border-primary
+              px-4 py-3
+              rounded-xl border border-border
+              outline-none focus:border-primary
             "
           />
 
           {errors.startDate && (
-            <p className="ml-2 mt-1 text-sm text-red-500">
+            <p
+              className="
+                ml-2 mt-1
+                text-sm text-red-500
+              "
+            >
               {errors.startDate.message}
             </p>
           )}
@@ -173,11 +183,9 @@ const CreateSessionCard = ({
         <div>
           <label
             className="
-              mb-2
               block
-              text-sm
-              font-medium
-              text-textSecondary
+              mb-2
+              text-sm font-medium text-textSecondary
             "
           >
             End Date
@@ -186,23 +194,21 @@ const CreateSessionCard = ({
           <input
             type="date"
             min={startDate}
-            {...register("endDate", {
-              required: "Please select end date",
-            })}
             className="
               w-full
-              rounded-xl
-              border
-              border-border
-              px-4
-              py-3
-              outline-none
-              focus:border-primary
+              px-4 py-3
+              rounded-xl border border-border
+              outline-none focus:border-primary
             "
           />
 
           {errors.endDate && (
-            <p className="ml-2 mt-1 text-sm text-red-500">
+            <p
+              className="
+                ml-2 mt-1
+                text-sm text-red-500
+              "
+            >
               {errors.endDate.message}
             </p>
           )}
@@ -211,11 +217,10 @@ const CreateSessionCard = ({
         {/* INFO */}
         <div
           className="
-            rounded-xl
-            bg-primary/5
             p-3
-            text-sm
-            text-textSecondary
+            text-sm text-textSecondary
+            bg-primary/5
+            rounded-xl
           "
         >
           Only one session can remain active at a time.
@@ -227,15 +232,12 @@ const CreateSessionCard = ({
           type="submit"
           className="
             w-full
-            rounded-xl
-            bg-primary
             py-3
-            font-medium
-            text-white
+            font-medium text-white
+            bg-primary
+            rounded-xl
             transition-all
-            hover:bg-primaryDark
-            disabled:cursor-not-allowed
-            disabled:opacity-70
+            hover:bg-primaryDark disabled:cursor-not-allowed disabled:opacity-70
           "
         >
           {submitting ? (

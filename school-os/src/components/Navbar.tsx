@@ -2,7 +2,7 @@ import { Bell, Search, ChevronDown, BellOff, Menu } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 import { capitalize } from "../utils/string";
 import { usePushNotifications } from "../hooks/usePushNotifications";
-import Loader from "./common/Loader";
+import Loader from "./ui/Loader";
 
 type NavbarProps = {
   onMenuClick: () => void;
@@ -17,23 +17,31 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
       className="
         z-30 flex
         h-[72px]
-        px-4 sm:px-6
+        px-4
         bg-surface/90
         border-b border-border
-        sticky top-0 items-center lg:justify-between backdrop-blur-md
-        justify-end
+        sticky top-0 items-center backdrop-blur-md justify-end
+        sm:px-6
+        lg:justify-between
       "
     >
-      <button onClick={onMenuClick} className="lg:hidden mr-auto">
+      <button
+        onClick={onMenuClick}
+        className="
+          mr-auto
+          lg:hidden
+        "
+      >
         <Menu size={24} />
       </button>
 
       {/* SEARCH */}
       <div
         className="
+          hidden
           w-full max-w-md
           relative
-          hidden lg:block
+          lg:block
         "
       >
         <Search
@@ -67,6 +75,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
       >
         {/* NOTIFICATION */}
         <button
+          onClick={permission !== "granted" ? enableNotifications : () => {}}
           className="
             flex
             h-11 w-11
@@ -74,7 +83,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             rounded-xl border border-border
             group relative items-center justify-center hover:bg-background
           "
-          onClick={permission !== "granted" ? enableNotifications : () => {}}
         >
           {permission === "granted" ? (
             <Bell size={20} />
@@ -116,9 +124,10 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         <button
           className="
             flex
-            md:px-3 py-2
-            rounded-xl md:border border-border
+            py-2
+            rounded-xl border-border
             items-center gap-3 hover:bg-background
+            md:px-3 md:border
           "
         >
           <div
@@ -136,7 +145,9 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
 
           <div
             className="
-             hidden sm:block text-left
+              hidden
+              text-left
+              sm:block
             "
           >
             <p
@@ -159,8 +170,9 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           <ChevronDown
             size={16}
             className="
+              hidden
               text-textSecondary
-              hidden sm:block
+              sm:block
             "
           />
         </button>

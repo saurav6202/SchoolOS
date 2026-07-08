@@ -1,5 +1,5 @@
 import { BookOpen, GraduationCap, Layers3 } from "lucide-react";
-import StatCard from "../../common/StatCard";
+import StatCard from "../../ui/StatCard";
 
 const SubjectStats = ({
   totalSubjects,
@@ -11,7 +11,6 @@ const SubjectStats = ({
   totalSubjects: number;
   loading: boolean;
 }) => {
-
   const stats = [
     {
       title: "Total Subjects",
@@ -38,13 +37,14 @@ const SubjectStats = ({
   return (
     <section
       className="
-        grid
-        gap-6
-        md:grid-cols-3
+        grid grid-cols-2
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
       "
     >
       {stats.map((stat) => (
-        <StatCard stat={stat}/>
+        <StatCard stat={stat} key={stat.title} />
       ))}
     </section>
   );

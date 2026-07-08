@@ -10,7 +10,7 @@ import {
   Trash2,
   Eye,
 } from "lucide-react";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import api from "../../../api/api";
 import { useEffect, useState } from "react";
 import { formatDateTime } from "../../../utils/formatDate";
@@ -81,7 +81,7 @@ const ActiveNotices = () => {
 
   const fetchNotices = async () => {
     const res = await api.get("/api/notices");
-    setNotices(res.data.data)
+    setNotices(res.data.data);
   };
 
   useEffect(() => {
@@ -251,19 +251,19 @@ const ActiveNotices = () => {
               >
                 <div
                   className="
-                  flex
-                  mt-4
-                  gap-3
-                "
+                    flex
+                    mt-4
+                    gap-3
+                  "
                 >
                   <Button
                     handleClick={() => handleEdit(notice._id)}
                     className="
-                    text-black text-sm
-                    bg-surface
-                    border border-border
-                    hover:border-primary
-                  "
+                      text-black text-sm
+                      bg-surface
+                      border border-border
+                      hover:border-primary
+                    "
                   >
                     <Pencil size={16} />
                     Edit
@@ -272,14 +272,14 @@ const ActiveNotices = () => {
                   <button
                     onClick={() => handleDelete(notice._id)}
                     className="
-                    flex
-                    px-6 py-3
-                    text-sm font-medium text-white
-                    bg-error
-                    rounded-xl
-                    transition-all
-                    items-center justify-center gap-2 hover:opacity-90
-                  "
+                      flex
+                      px-6 py-3
+                      text-sm font-medium text-white
+                      bg-error
+                      rounded-xl
+                      transition-all
+                      items-center justify-center gap-2 hover:opacity-90
+                    "
                   >
                     <Trash2 size={16} />
                     Delete

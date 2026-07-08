@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 import SchoolSettingsCard from "../../components/admin/settings/SchoolSettingsCard";
-import PageLoader from "../../components/common/PageLoader";
+import PageLoader from "../../components/ui/PageLoader";
 // import { delay } from "../../utils/delay";
 
 type Settings = {
@@ -15,7 +15,7 @@ type Settings = {
 };
 
 const SchoolSettings = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const [settings, setSettings] = useState<Settings>();
   const fetchSettings = async () => {
@@ -26,33 +26,53 @@ const SchoolSettings = () => {
     fetchSettings();
   }, []);
 
-  useEffect(() => {
-    const loadPage = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 10000));
-      setLoading(false);
-    };
+  // useEffect(() => {
+  //   const loadPage = async () => {
+  //     await new Promise((resolve) => setTimeout(resolve, 10000));
+  //     setLoading(false);
+  //   };
 
-    loadPage();
-  }, []);
+  //   loadPage();
+  // }, []);
 
-  if (loading) {
-  return <PageLoader />;
-}
+  // if (loading) {
+  //   return <PageLoader />;
+  // }
 
   return (
-    <div className="space-y-6">
+    <div
+      className="
+        space-y-6
+      "
+    >
       {/* PAGE HEADER */}
       <div>
-        <h1 className="text-2xl font-bold text-textPrimary">School Settings</h1>
+        <h1
+          className="
+            text-2xl font-bold text-textPrimary
+          "
+        >
+          School Settings
+        </h1>
 
-        <p className="mt-1 text-textSecondary">
+        <p
+          className="
+            mt-1
+            text-textSecondary
+          "
+        >
           Configure school information, branding, contact details and principal
           information.
         </p>
       </div>
 
       {/* SETTINGS CARDS */}
-      <div className="grid gap-6">
+      <div
+        className="
+          grid
+          gap-6
+        "
+      >
         <SchoolSettingsCard settings={settings} />
       </div>
     </div>
