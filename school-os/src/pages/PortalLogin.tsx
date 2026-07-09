@@ -1,5 +1,4 @@
 import {
-  GraduationCap,
   Eye,
   EyeOff,
   ShieldCheck,
