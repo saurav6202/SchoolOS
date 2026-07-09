@@ -85,10 +85,10 @@ const SchoolSettingsCard = ({
       console.log("response submit: ", res);
       showSuccess(res.data.message);
       reset(res.data.data);
-      setLogoPreview(res.data.data.logo)
+      setLogoPreview(res.data.data.logo);
     } catch (error: any) {
       showError(error.response.data.message);
-    }finally{
+    } finally {
       setSubmitting(false);
     }
   };
@@ -96,12 +96,12 @@ const SchoolSettingsCard = ({
   return (
     <section
       className="
-        rounded-2xl
-        border
-        border-border
+            p-4
         bg-surface
-        p-6
+        rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
@@ -130,7 +130,11 @@ const SchoolSettingsCard = ({
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSubmit(submitFnc)} className="mt-6 space-y-5">
+      <form
+        onSubmit={handleSubmit(submitFnc)}
+        className=" mt-5 space-y-4
+          sm:mt-6"
+      >
         {/* LOGO */}
         <div>
           <label

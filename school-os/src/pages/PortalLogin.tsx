@@ -79,7 +79,13 @@ const PortalLogin = () => {
       className="
         flex overflow-hidden
         min-h-screen
-        px-6 py-10
+        px-4
+py-4
+
+sm:px-6
+sm:py-8
+
+lg:py-10
         bg-gradient-to-br from-[#EFF6FF] via-white to-[#DBEAFE]
         items-center justify-center relative
       "
@@ -87,7 +93,14 @@ const PortalLogin = () => {
       {/* BACKGROUND GLOW */}
       <div
         className="
-          w-[500px] h-[500px]
+          w-64
+h-64
+
+sm:w-80
+sm:h-80
+
+lg:w-[500px]
+lg:h-[500px]
           bg-primary/10
           rounded-full
           absolute top-0 left-0 blur-3xl
@@ -109,7 +122,8 @@ const PortalLogin = () => {
           z-10 overflow-hidden grid grid-cols-1
           w-full max-w-6xl
           bg-white/70
-          rounded-[40px] border border-white/20
+          rounded-3xl
+sm:rounded-[40px] border border-white/20
           shadow-[0_25px_80px_rgba(0,0,0,0.12)]
           relative backdrop-blur-2xl
           lg:grid-cols-2
@@ -146,17 +160,20 @@ const PortalLogin = () => {
               className="
                 flex
                 w-16 h-16
-                bg-white/10
+                bg-white/20
                 rounded-2xl
                 backdrop-blur-xl items-center justify-center
+                p-1
               "
             >
-              <GraduationCap
+              <img src="logo.png" alt="school_logo dps_logo" />
+
+              {/* <GraduationCap
                 size={34}
                 className="
                   text-white
                 "
-              />
+              /> */}
             </div>
 
             <h1
@@ -259,14 +276,15 @@ const PortalLogin = () => {
         <div
           className="
             flex
-            p-8
+           p-5
+sm:p-8
+lg:p-14
             items-center justify-center
-            lg:p-14
           "
         >
           <div
             className="
-              w-full max-w-md
+              w-full max-w-md mx-auto
             "
           >
             {/* MOBILE LOGO */}
@@ -281,25 +299,32 @@ const PortalLogin = () => {
               <div
                 className="
                   flex
-                  w-16 h-16
-                  bg-primary
+                  w-16
+                  h-16
+                  p-1
+                  bg-primary/10
                   rounded-2xl
                   items-center justify-center
                 "
               >
-                <GraduationCap
-                  size={34}
+                <img src="logo.png" alt="" />
+                {/* <GraduationCap
                   className="
-                    text-white
+                   h-7
+                  w-7
+                  sm:h-[34px]
+                  sm:w-[34px]
+                  text-white
                   "
-                />
+                /> */}
               </div>
             </div>
 
             {/* TITLE */}
             <h2
               className="
-                text-4xl font-bold text-textPrimary font-heading text-center
+               text-3xl
+sm:text-4xl font-bold text-textPrimary font-heading text-center
               "
             >
               Portal Login
@@ -307,7 +332,9 @@ const PortalLogin = () => {
 
             <p
               className="
-                mt-4
+              mt-3
+text-sm
+sm:text-base
                 text-center text-textSecondary leading-relaxed
               "
             >
@@ -318,7 +345,11 @@ const PortalLogin = () => {
             <div
               className="
                 grid grid-cols-2
-                mt-10 p-2
+                mt-8
+sm:mt-10
+
+p-1.5
+sm:p-2
                 bg-background
                 rounded-2xl
               "
@@ -327,7 +358,11 @@ const PortalLogin = () => {
                 onClick={() => setRole("student")}
                 className={`
                   flex
-                  py-3
+                  py-2.5
+sm:py-3
+
+text-sm
+sm:text-base
                   font-medium
                   rounded-xl
                   transition-all
@@ -368,14 +403,19 @@ const PortalLogin = () => {
             <form
               onSubmit={handleSubmit(submitFnc)}
               className="
-                mt-10 space-y-6
+               mt-8
+sm:mt-10
+
+space-y-5
+sm:space-y-6
               "
             >
               {/* ID */}
               <div>
                 <label
                   className="
-                    text-sm font-medium text-textPrimary
+                    text-xs
+sm:text-sm font-medium text-textPrimary
                   "
                 >
                   {role === "student" ? "Student ID" : "Teacher ID"}
@@ -395,11 +435,18 @@ const PortalLogin = () => {
                   }
                   className="
                     w-full
-                    mt-2 px-5 py-4
-                    bg-white
-                    rounded-2xl border border-border
-                    transition-all
-                    outline-none duration-300 focus:border-primary focus:ring-4 focus:ring-primary/10
+                    px-4
+                    py-3
+                  md:px-5
+                  md:py-4
+                  rounded-2xl
+                  border
+                  border-border
+                  outline-none
+                  focus:border-primary
+                  focus:ring-4
+                  focus:ring-primary/10
+                  transition-all
                   "
                 />
                 {errors.userId && (
@@ -432,12 +479,19 @@ const PortalLogin = () => {
                       required: "Password is Required*",
                     })}
                     className="
-                      w-full
-                      px-5 py-4
-                      bg-white
-                      rounded-2xl border border-border
-                      transition-all
-                      outline-none duration-300 focus:border-primary focus:ring-4 focus:ring-primary/10
+                   w-full
+                    px-4
+                    py-3
+                  md:px-5
+                  md:py-4
+                  rounded-2xl
+                  border
+                  border-border
+                  outline-none
+                  focus:border-primary
+                  focus:ring-4
+                  focus:ring-primary/10
+                  transition-all
                     "
                   />
                   {errors.password && (
@@ -451,7 +505,7 @@ const PortalLogin = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="
                       text-textSecondary
-                      absolute top-1/2 right-5 -translate-y-1/2
+                      absolute top-1/2 right-4 sm:right-5 -translate-y-1/2
                     "
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -464,10 +518,10 @@ const PortalLogin = () => {
                 className="
                   flex
                   text-sm
-                  items-center justify-between
+                  items-center justify-end
                 "
               >
-                <label
+                {/* <label
                   className="
                     flex
                     text-textSecondary
@@ -476,7 +530,7 @@ const PortalLogin = () => {
                 >
                   <input type="checkbox" />
                   Remember me
-                </label>
+                </label> */}
 
                 <button
                   type="button"
@@ -492,10 +546,17 @@ const PortalLogin = () => {
               <button
                 className="
                   w-full
-                  py-4
+                 py-3.5
+sm:py-4
+
+rounded-xl
+sm:rounded-2xl
+
+text-sm
+sm:text-base
                   text-white font-semibold
                   bg-primary
-                  rounded-2xl
+                  md:rounded-2xl
                   transition-all
                   group duration-300 hover:shadow-xl hover:scale-[1.01]
                 "

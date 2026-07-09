@@ -266,7 +266,7 @@ const ActiveNotices = () => {
                     "
                   >
                     <Pencil size={16} />
-                    Edit
+                    <span className="hidden md:block">Edit</span>
                   </Button>
 
                   <button
@@ -282,7 +282,7 @@ const ActiveNotices = () => {
                     "
                   >
                     <Trash2 size={16} />
-                    Delete
+                    <span className="hidden md:block">Delete</span>
                   </button>
                 </div>
               </div>

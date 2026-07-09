@@ -1,13 +1,7 @@
-import {
-  CalendarRange,
-  CheckCircle2,
-  Power,
-  Trash2,
-} from "lucide-react";
+import { CalendarRange, CheckCircle2, Power, Trash2 } from "lucide-react";
 import ActivateSessionDialog from "./ActivateSessionDialog";
 import { useState } from "react";
 import api from "../../../api/api";
-import { formatDate } from "../../../utils/formatDate";
 import { showError, showSuccess } from "../../../utils/toast";
 
 interface Session {
@@ -163,12 +157,12 @@ const SessionsTable = ({
 
                   {/* START DATE */}
                   <td className="px-6 py-4 text-textSecondary">
-                    {formatDate(session.startDate)}
+                    {new Date(session.startDate).toLocaleDateString("en-GB")}
                   </td>
 
                   {/* END DATE */}
                   <td className="px-6 py-4 text-textSecondary">
-                    {formatDate(session.endDate)}
+                    {new Date(session.endDate).toLocaleDateString("en-GB")}
                   </td>
 
                   {/* STATUS */}

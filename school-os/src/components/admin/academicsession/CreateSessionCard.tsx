@@ -61,10 +61,12 @@ const CreateSessionCard = ({
   return (
     <section
       className="
-        p-6
+         p-4
         bg-surface
         rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
@@ -114,7 +116,8 @@ const CreateSessionCard = ({
       <form
         onSubmit={handleSubmit(submitFnc)}
         className="
-          mt-6 space-y-4
+          mt-5 space-y-4
+          sm:mt-6
         "
       >
         {/* SESSION NAME */}

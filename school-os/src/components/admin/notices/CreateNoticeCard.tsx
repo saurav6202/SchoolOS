@@ -113,10 +113,12 @@ const CreateNoticeCard = () => {
   return (
     <section
       className="
-        p-6
+       p-4
         bg-surface
         rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
@@ -166,7 +168,8 @@ const CreateNoticeCard = () => {
       <form
         onSubmit={handleSubmit}
         className="
-          mt-6 space-y-6
+          mt-5 space-y-4
+          sm:mt-6
         "
       >
         {/* TITLE */}
@@ -243,7 +246,7 @@ const CreateNoticeCard = () => {
 
             <div
               className="
-                grid grid-cols-3
+                grid md:grid-cols-3
                 gap-3
               "
             >
@@ -292,7 +295,7 @@ const CreateNoticeCard = () => {
 
             <div
               className="
-                grid grid-cols-3
+                grid md:grid-cols-3
                 gap-3
               "
             >

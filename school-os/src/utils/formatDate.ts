@@ -27,3 +27,12 @@ export const formatDateTime = (dateString: string) => {
     hour12: true,
   })}`;
 };
+
+export const formatDateString = (dateString: string) => {
+  const formatted = new Date(dateString).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+  return formatted;
+};

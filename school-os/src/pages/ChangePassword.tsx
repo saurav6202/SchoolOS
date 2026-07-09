@@ -66,7 +66,7 @@ const ChangePassword = () => {
           text: "",
           width: "0%",
           color: "",
-        }   
+        }
       : passedChecks <= 2
         ? {
             text: "Weak",
@@ -109,7 +109,7 @@ const ChangePassword = () => {
         navigate("/change-password");
       }
     } catch (error) {
-      showError("Incorrect current password")
+      showError("Incorrect current password");
       console.error(error);
     } finally {
       setChanging(false);
@@ -119,19 +119,21 @@ const ChangePassword = () => {
   return (
     <section
       className="
-        min-h-screen
-        flex
-        items-center
-        justify-center
-        px-6
-        py-10
-        bg-gradient-to-br
-        from-[#EFF6FF]
-        via-white
-        to-[#DBEAFE]
-        relative
-        overflow-hidden
-      "
+    relative
+    flex
+    min-h-screen
+    items-center
+    justify-center
+    overflow-hidden
+
+    px-4 py-6
+    sm:px-6 sm:py-10
+
+    bg-gradient-to-br
+    from-[#EFF6FF]
+    via-white
+    to-[#DBEAFE]
+  "
     >
       {/* Background Glow */}
       <div
@@ -162,21 +164,23 @@ const ChangePassword = () => {
 
       <div
         className="
-            relative
-            z-10
-            w-full
-            max-w-7xl
-            grid
-            lg:grid-cols-2
-            gap-8
-            items-center
-          bg-white/50
-          rounded-[32px]
-          overflow-hidden
-          border
-          border-border
-          
-          "
+    relative
+    z-10
+
+    w-full
+    max-w-7xl
+
+    overflow-hidden
+    rounded-3xl
+    border
+    border-border
+
+    bg-white/60
+    backdrop-blur-xl
+
+    grid
+    lg:grid-cols-2
+  "
       >
         <div className="hidden lg:block">
           <div
@@ -247,8 +251,7 @@ const ChangePassword = () => {
                 </p>
 
                 <p>
-                  <span className="text-textSecondary">ID:</span>{" "}
-                  {user?.userId}
+                  <span className="text-textSecondary">ID:</span> {user?.userId}
                 </p>
               </div>
             </div>
@@ -284,43 +287,57 @@ const ChangePassword = () => {
 
         <div
           className="
-          p-8
-          bg-primaryLight/20
-          md:p-10
-        "
+    bg-primaryLight/20
+    p-5
+    sm:p-8
+    md:p-10
+"
         >
+          <div className="mb-6 flex justify-center">
+            <img src={logo} className="h-16 lg:hidden" alt="School Logo" />
           {/* Icon */}
           <div
             className="
-            w-16
-            h-16
-            mx-auto
+            w-14
+            h-14
+            lg:h-16
+            lg:w-16
             rounded-2xl
             bg-primary
-            flex
             items-center
             justify-center
+            hidden lg:flex
           "
           >
             <ShieldCheck size={30} className="text-white" />
           </div>
+          </div>
+
 
           {/* Heading */}
           <div className="text-center">
             <h2
               className="
-                text-3xl
+              text-2xl
+                md:text-3xl
                 font-bold
                 text-textPrimary
+                flex
+                items-center
+                justify-center
+                gap-2
               "
             >
-              Secure Your Account
+              <ShieldCheck size={30} className="text-textPrimary lg:hidden" /> Secure Your Account
             </h2>
 
             <p
               className="
-                mt-3
-                text-textSecondary
+              mt-2
+text-sm
+lg:text-md
+sm:mt-3
+text-textSecondary
               "
             >
               Create a strong password before continuing.

@@ -49,10 +49,12 @@ const CreateSubjectCard = ({
   return (
     <section
       className="
-        p-6
+        p-4
         bg-surface
         rounded-2xl border border-border
         shadow-card
+        sm:p-5
+        lg:p-6
       "
     >
       {/* HEADER */}
@@ -102,7 +104,8 @@ const CreateSubjectCard = ({
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="
-          mt-6 space-y-5
+            mt-5 space-y-4
+          sm:mt-6
         "
       >
         {/* SUBJECT NAME */}
@@ -207,6 +210,7 @@ const CreateSubjectCard = ({
                 text-center
                 rounded-xl border
                 cursor-pointer transition-all
+                flex flex-col items-center justify-center
                 ${
                   selectedCategory === "core"
                     ? "border-primary bg-primaryLight"
@@ -235,6 +239,7 @@ const CreateSubjectCard = ({
                 className="
                   mt-1
                   text-xs text-textSecondary
+                  hidden md:block
                 "
               >
                 Mandatory subject
@@ -247,6 +252,7 @@ const CreateSubjectCard = ({
                 text-center
                 rounded-xl border
                 cursor-pointer transition-all
+                flex flex-col items-center justify-center
                 ${
                   selectedCategory === "optional"
                     ? "border-primary bg-primaryLight"
@@ -266,8 +272,8 @@ const CreateSubjectCard = ({
               <p
                 className="
                   font-medium
-                "
-              >
+                  "
+                  >
                 Optional
               </p>
 
@@ -275,6 +281,7 @@ const CreateSubjectCard = ({
                 className="
                   mt-1
                   text-xs text-textSecondary
+                  hidden sm:block
                 "
               >
                 Elective subject
